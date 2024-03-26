@@ -1,0 +1,13 @@
+version: '3.5'
+name: dev-env--nodejs
+services:
+  node:
+    image: node:20
+    container_name: dev-env--nodejs
+    command: bash -c "tail -f /dev/null"
+    working_dir: /usr/code
+    volumes:
+      - .:/usr/code
+      - /usr/code/node_modules
+    ports:
+      - 3000:3000
