@@ -7,16 +7,29 @@ import {
 import CssBaseline from '@mui/material/CssBaseline'
 
 import Login from './login'
+import Root from './containers/root'
 
 const router = createBrowserRouter([
   {
+    id: 'root',
     path: '/',
-    element: <h1>Hello World</h1>,
-    errorElement: <h1>Error</h1>
-  },
-  {
-    path: '/login',
-    element: <Login />
+    loader: async () => {
+      const res = await fetch('/api/users/me')
+      const user = await res.json() 
+
+      return {
+        user
+      }
+    },
+    shouldRevalidate: () => true,
+    element: <Root />,
+    errorElement: <h1>Error</h1>,
+    children: [
+      {
+        path: 'login',
+        element: <Login />
+      }
+    ]
   }
 ])
 

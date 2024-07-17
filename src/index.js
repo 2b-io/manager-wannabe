@@ -28,12 +28,20 @@ const main = async () => {
   // setup passport
   initPassport(app)
 
-  app.get('/api', (req, res, next) => {
+  app.use('/api', (req, res, next) => {
     if (!req.user) {
       return res.sendStatus(401)
     }
 
     next()
+  })
+
+  app.get('/api/users/me', (req, res, next) => {
+    setTimeout(() => {
+      return res.json(req.user)
+
+    }, 1000)
+
   })
 
   const PORT = process.env.PORT_API || 3001
