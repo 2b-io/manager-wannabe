@@ -11,21 +11,21 @@ import {
   Link
 } from '@mui/material'
 
-const AuthRoutes = () => {
+const Layout = () => {
   useEffect(() => {
-    console.log('AuthRoutes loaded.')
+    console.log('Layout loaded.')
   })
 
   return (
     <React.Fragment>
       <ul>
         <li><Link component={RouterLink} to="/">Dashboard</Link></li>
-        <li><Link component={RouterLink} to="/timesheet">Timesheet</Link></li>
-        <li><Link component={RouterLink} to="/login">Login</Link></li>
+        <li><Link component={RouterLink} to="/timesheet/100">Timesheet</Link></li>
+        <li><Link href="/auth/logout">Logout</Link></li>
       </ul>
       <Outlet />
     </React.Fragment>
   )
 }
 
-export default AuthRoutes
+export default Layout

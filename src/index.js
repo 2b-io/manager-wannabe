@@ -3,7 +3,6 @@ import express from 'express'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
-
 import initPassport from './auth/passport'
 import createConnection from './services/database'
 
@@ -37,11 +36,7 @@ const main = async () => {
   })
 
   app.get('/api/users/me', (req, res, next) => {
-    setTimeout(() => {
-      return res.json(req.user)
-
-    }, 1000)
-
+    return res.json(req.user)
   })
 
   const PORT = process.env.PORT_API || 3001

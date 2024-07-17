@@ -2,43 +2,81 @@ import React from 'react'
 import {
   createBrowserRouter,
   defer,
+  useLoaderData,
   Await,
+  Navigate,
+  Outlet,
   RouterProvider
 } from 'react-router-dom'
 
 import CssBaseline from '@mui/material/CssBaseline'
 
 import Login from './login'
-import AuthRoutes from './containers/auth'
+import Layout from './containers/layout'
 import Root from './containers/root'
 import Timesheet from './containers/timesheet'
 
-const delay = (time, value) => new Promise((resolve) => {
-  setTimeout(() => resolve(value), time)
-})
+const fetchUser = async () => {
+  try {
+    const res = await fetch('/api/users/me')
+    const user = await res.json()
 
-const auth = (loader) => () => {
+    return user
+  } catch (e) {
+    return null
+  }
+}
+
+const authLoader = () => {
   console.log('auth loader')
 
   return defer({
-    user: delay(5000, {email: 'longlh@2-b.io'})
+    user: fetchUser()
   })
 }
 
+const ProtectedRoute = () => {
+  const data = useLoaderData()
 
-const router = createBrowserRouter([{
-  path: '/',
-  element: <AuthRoutes />,
-  // errorElement: <h1>Error</h1>,
+  return (
+    <React.Suspense>
+      <Await
+        resolve={data.user}
+        errorElement={
+          <h1>Fetch user failed!</h1>
+        }>
+        {(user) => user ? (
+          <Outlet context={{user}} />
+        ) : <Navigate to="/login" replace={true} />}
+      </Await>
+    </React.Suspense>
+  )
+}
+
+const createProtectedRoute = (route) => ({
+  path: route.path,
+  loader: authLoader,
+  element: <ProtectedRoute />,
   children: [{
-    index: true,
-    loader: auth(),
-    element: <Root />
-  }, {
-    path: 'timesheet',
-    element: <Timesheet />
+    ...route,
+    // index: true,
+    path: undefined
   }]
-}, {
+})
+
+const router = createBrowserRouter([createProtectedRoute({
+  path: '/',
+  element: <Layout />,
+  // errorElement: <h1>Error</h1>,
+  children: [createProtectedRoute({
+    index: true,
+    element: <Root />
+  }), createProtectedRoute({
+    index: true,
+    path: 'timesheet/:id',
+    element: <Timesheet />
+  })]
+}), {
   path: '/login',
   element: <Login />
 }])
