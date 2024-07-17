@@ -1,27 +1,27 @@
 import React from 'react'
 import {
+  Await,
   Link as RouterLink,
   Outlet,
-  useRouteLoaderData
+  useLoaderData
 } from 'react-router-dom'
 import {
   Link
 } from '@mui/material'
 
 const Root = () => {
-  const data = useRouteLoaderData('root')
+  const data = useLoaderData()
 
   console.log('Root', data)
 
   return (
-    <React.Fragment>
-      <h1>Root</h1>
-      <ul>
-        <li><Link component={RouterLink} to="/">Home</Link></li>
-        <li><Link component={RouterLink} to="/login">Login</Link></li>
-      </ul>
-      <Outlet />
-    </React.Fragment>
+    <React.Suspense>
+      <Await resolve={data.user}>
+        {(user) => (
+          <h1>Hello {user.email}</h1>
+        )}
+      </Await>
+    </React.Suspense>
   )
 }
 

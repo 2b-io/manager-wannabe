@@ -8,7 +8,7 @@ module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: path.join(root, 'src/client/index.js'),
   output: {
-    filename: 'assets/main.[hash:6].js',
+    filename: 'assets/main.[contenthash:6].js',
     path: path.join(root, 'public'),
     clean: true
   },
@@ -22,6 +22,9 @@ module.exports = {
       target: `http://localhost:${process.env.PORT_API || 3001}`
     }],
     historyApiFallback: true
+  },
+  watchOptions: {
+    poll: 1000
   },
   plugins: [
     new HtmlWebpackPlugin({

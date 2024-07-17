@@ -13,8 +13,6 @@ const initPassport = (app) => {
     callbackURL: 'http://localhost:3000/auth/google/callback',
     passReqToCallback: true
   }, async (req, accessToken, refreshToken, profile, done) => {
-    console.log(profile)
-
     const user = await models.User.findOneAndUpdate({
       email: profile.email
     }, {

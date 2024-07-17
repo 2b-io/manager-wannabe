@@ -1,37 +1,47 @@
 import React from 'react'
 import {
   createBrowserRouter,
+  defer,
+  Await,
   RouterProvider
 } from 'react-router-dom'
 
 import CssBaseline from '@mui/material/CssBaseline'
 
 import Login from './login'
+import AuthRoutes from './containers/auth'
 import Root from './containers/root'
+import Timesheet from './containers/timesheet'
 
-const router = createBrowserRouter([
-  {
-    id: 'root',
-    path: '/',
-    loader: async () => {
-      const res = await fetch('/api/users/me')
-      const user = await res.json() 
+const delay = (time, value) => new Promise((resolve) => {
+  setTimeout(() => resolve(value), time)
+})
 
-      return {
-        user
-      }
-    },
-    shouldRevalidate: () => true,
-    element: <Root />,
-    errorElement: <h1>Error</h1>,
-    children: [
-      {
-        path: 'login',
-        element: <Login />
-      }
-    ]
-  }
-])
+const auth = (loader) => () => {
+  console.log('auth loader')
+
+  return defer({
+    user: delay(5000, {email: 'longlh@2-b.io'})
+  })
+}
+
+
+const router = createBrowserRouter([{
+  path: '/',
+  element: <AuthRoutes />,
+  // errorElement: <h1>Error</h1>,
+  children: [{
+    index: true,
+    loader: auth(),
+    element: <Root />
+  }, {
+    path: 'timesheet',
+    element: <Timesheet />
+  }]
+}, {
+  path: '/login',
+  element: <Login />
+}])
 
 const App = () => {
   return (
