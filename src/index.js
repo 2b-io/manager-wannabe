@@ -1,7 +1,14 @@
-import path from 'path';
+import 'dotenv/config'
+import express from 'express'
 
 const main = async () => {
-  console.log(path.resolve(__dirname))
+  const app = express()
+
+  const PORT = process.env.PORT_API || 3001
+
+  app.listen(PORT, () => {
+    console.log(`Started at :${PORT}`)
+  })
 }
 
-main();
+main()
