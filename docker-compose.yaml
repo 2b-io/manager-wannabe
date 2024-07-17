@@ -1,9 +1,9 @@
 version: '3.5'
-name: dev-env--nodejs
+name: dev-env--manager-wannabe
 services:
   node:
     image: node:20
-    container_name: dev-env--nodejs
+    container_name: dev-env--manager-wannabe
     command: bash -c "tail -f /dev/null"
     working_dir: /usr/code
     volumes:
@@ -11,3 +11,12 @@ services:
       - /usr/code/node_modules
     ports:
       - 3000:3000
+  mongo:
+    image: mongo:6.0
+    container_name: mongo--manager-wannabe
+    volumes:
+      - mongodata6:/data/db
+    ports:
+      - "27017:27017"
+volumes:
+  mongodata6:
