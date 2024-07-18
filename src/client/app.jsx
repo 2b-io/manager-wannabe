@@ -9,11 +9,11 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
-import CssBaseline from '@mui/material/CssBaseline'
+import GlobalStyle from './global-style'
 
-import Login from './login'
+import Login from './containers/login'
 import Layout from './containers/layout'
-import Root from './containers/root'
+import Dashboard from './containers/dashboard'
 import Timesheet from './containers/timesheet'
 
 const fetchUser = async () => {
@@ -70,7 +70,7 @@ const router = createBrowserRouter([createProtectedRoute({
   // errorElement: <h1>Error</h1>,
   children: [createProtectedRoute({
     index: true,
-    element: <Root />
+    element: <Dashboard />
   }), createProtectedRoute({
     index: true,
     path: 'timesheet/:id',
@@ -84,7 +84,7 @@ const router = createBrowserRouter([createProtectedRoute({
 const App = () => {
   return (
     <React.StrictMode>
-      <CssBaseline />
+      <GlobalStyle />
       <RouterProvider router={router} />
     </React.StrictMode>
   )

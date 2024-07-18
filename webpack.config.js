@@ -15,7 +15,7 @@ module.exports = {
   devServer: {
     port: process.env.PORT || 3000,
     client: {
-      logging: 'info'
+      logging: 'verbose'
     },
     proxy: [{
       context: ['/api', '/auth'],
@@ -32,7 +32,10 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      "components": path.join(root, 'src/client/components')
+    }
   },
   module: {
     rules: [

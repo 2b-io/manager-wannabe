@@ -1,7 +1,7 @@
 import React from 'react'
 import {useOutletContext} from 'react-router-dom'
 
-const Root = () => {
+const Dashboard = () => {
   const {user} = useOutletContext()
 
   return (
@@ -9,4 +9,4 @@ const Root = () => {
   )
 }
 
-export default Root
+export default Dashboard

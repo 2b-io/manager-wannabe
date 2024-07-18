@@ -3,28 +3,23 @@ import React, {
   useState
 } from 'react'
 import {
-  Link as RouterLink,
+  Link,
   Navigate,
   Outlet
 } from 'react-router-dom'
-import {
-  Link
-} from '@mui/material'
+
+import Button from 'components/button'
 
 const Layout = () => {
-  useEffect(() => {
-    console.log('Layout loaded.')
-  })
-
   return (
-    <React.Fragment>
+    <div>
       <ul>
-        <li><Link component={RouterLink} to="/">Dashboard</Link></li>
-        <li><Link component={RouterLink} to="/timesheet/100">Timesheet</Link></li>
-        <li><Link href="/auth/logout">Logout</Link></li>
+        <li><Button as={Link} to="/">Dashboard</Button></li>
+        <li><Button as={Link} to="/timesheet/100">Timesheet</Button></li>
+        <li><Button as="a" href="/auth/logout">Logout</Button></li>
       </ul>
       <Outlet />
-    </React.Fragment>
+    </div>
   )
 }
 
