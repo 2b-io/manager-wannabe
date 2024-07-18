@@ -38,11 +38,18 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    font-size: 10px;
+    font-size: 8px;
+    font-family: Roboto;
   }
 
   body {
-    font-size: 1.4rem;
+    font-size: 2rem;
+    line-height: 3rem;
+
+    * {
+      font-size: inherit;
+      line-height: inherit;
+    }
   }
 `
 
