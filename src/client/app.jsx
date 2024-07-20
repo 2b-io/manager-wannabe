@@ -1,5 +1,8 @@
 import React from 'react'
 import {
+  Provider as StateProvider
+} from 'react-redux'
+import {
   createBrowserRouter,
   defer,
   useLoaderData,
@@ -16,6 +19,8 @@ import Layout from './containers/layout'
 import Dashboard from './containers/dashboard'
 import Timesheet from './containers/timesheet'
 
+import store from './state/store'
+
 const fetchUser = async () => {
   try {
     const res = await fetch('/api/users/me')
@@ -27,13 +32,9 @@ const fetchUser = async () => {
   }
 }
 
-const authLoader = () => {
-  console.log('auth loader')
-
-  return defer({
-    user: fetchUser()
-  })
-}
+const authLoader = () => defer({
+  user: fetchUser()
+})
 
 const ProtectedRoute = () => {
   const data = useLoaderData()
@@ -85,7 +86,9 @@ const App = () => {
   return (
     <React.StrictMode>
       <GlobalStyle />
-      <RouterProvider router={router} />
+      <StateProvider store={store}>
+        <RouterProvider router={router} />
+      </StateProvider>
     </React.StrictMode>
   )
 }

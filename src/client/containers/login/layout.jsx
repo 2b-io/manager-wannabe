@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import logo from './2b-logo-2020-10-circle.png'
 
-const Container = styled.main`
+const Container = styled.div`
   max-width: 50rem;
   height: 50rem;
   margin-left: auto;

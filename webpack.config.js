@@ -34,7 +34,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      "components": path.join(root, 'src/client/components')
+      components: path.join(root, 'src/client/components'),
+      state: path.join(root, 'src/client/state')
     }
   },
   module: {

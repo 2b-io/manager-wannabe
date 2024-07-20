@@ -8,10 +8,6 @@ import styled from 'styled-components'
 import Button from 'components/button'
 import Container from 'components/container'
 
-const Main = styled.main`
-
-`
-
 const Nav = styled.nav`
   background: black;
   color: white;
@@ -38,7 +34,7 @@ Menu.Item = styled.div`
 
 const Layout = () => {
   return (
-    <Main>
+    <React.Fragment>
       <Nav>
         <Menu>
           <Menu.Item>
@@ -55,7 +51,7 @@ const Layout = () => {
       <Container>
         <Outlet />
       </Container>
-    </Main>
+    </React.Fragment>
   )
 }
 
