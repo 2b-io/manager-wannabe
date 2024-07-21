@@ -1,10 +1,13 @@
+import React from 'react'
 import styled from 'styled-components'
 
-const Grid = styled.div`
+const Grid = styled(
+  ({fullWidth, ...props}) => <div {...props} />
+)`
   display: grid;
   grid-gap: 2rem;
 
-  ${({fullwidth}) => fullwidth && `
+  ${({fullWidth}) => fullWidth && `
     grid-template-columns: minmax(0, 1fr);
   ` || `
     @media (min-width: 768px) {

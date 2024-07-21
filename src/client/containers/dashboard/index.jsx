@@ -52,7 +52,7 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <Grid fullwidth>
+    <Grid fullWidth>
       <FavoriteProjects projects={[]}
         onProjectRender={(project) => {
           return (

@@ -20,6 +20,7 @@ import Dashboard from './containers/dashboard'
 import Timesheet from './containers/timesheet'
 
 import store from './state/store'
+import {project} from './state/actions'
 
 const fetchUser = async () => {
   try {
@@ -57,21 +58,28 @@ const ProtectedRoute = () => {
 const createProtectedRoute = (route) => ({
   path: route.path,
   loader: authLoader,
+  errorElement: route.errorElement,
   element: <ProtectedRoute />,
   children: [{
     ...route,
     // index: true,
-    path: undefined
+    path: undefined,
+    errorElement: undefined
   }]
 })
 
 const router = createBrowserRouter([createProtectedRoute({
   path: '/',
   element: <Layout />,
-  // errorElement: <h1>Error</h1>,
+  errorElement: <Navigate to="/" />,
   children: [createProtectedRoute({
     index: true,
-    element: <Dashboard />
+    element: <Dashboard />,
+    loader: () => {
+      store.dispatch(project.fetchProjects())
+
+      return null
+    }
   }), createProtectedRoute({
     index: true,
     path: 'timesheet/:id',
@@ -79,6 +87,7 @@ const router = createBrowserRouter([createProtectedRoute({
   })]
 }), {
   path: '/login',
+  exact: true,
   element: <Login />
 }])
 
