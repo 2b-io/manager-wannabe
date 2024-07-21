@@ -2,14 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Card = styled.div`
-  border-radius: 2rem;
+  border-radius: 1rem;
   background: whitesmoke;
-  padding: 2rem;
+  overflow: hidden;
 `
 
 const Header = styled.div`
   display: flex;
-  grid-gap: 2rem;
+  padding: 2rem;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #333;
+  }
 
   & > *:first-child {
     flex-grow: 1;
@@ -24,12 +28,41 @@ const Header = styled.div`
   }
 `
 
-const Project = ({data: project}) => {
+const HeaderAction = styled.button`
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  background: transparent;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+`
+
+const Content = styled.div`
+  padding: 2rem;
+`
+
+const Project = ({
+  actions,
+  data: project
+}) => {
   return (
     <Card>
       <Header>
         <h2>{project.name}</h2>
-        <button>Star</button>
+        {actions.map((action, index) => {
+          return (
+            <HeaderAction key={index} onClick={action.onClick}>
+              {action.icon}
+            </HeaderAction>
+          )
+        })}
       </Header>
     </Card>
   )

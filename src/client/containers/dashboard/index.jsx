@@ -6,9 +6,12 @@ import EmptyState from 'components/empty-state'
 import Grid from 'components/grid'
 import {project} from 'state/actions'
 
+import {FiClock} from 'react-icons/fi';
+import {FiStar} from 'react-icons/fi'
+
 import Project from './project'
 
-const FavoriteProjects = ({projects}) => {
+const FavoriteProjects = ({projects, onProjectRender}) => {
   if (!projects || !projects.length) {
     return (
       <EmptyState>
@@ -19,14 +22,14 @@ const FavoriteProjects = ({projects}) => {
   }
 
   return (
-    <ProjectList projects={projects} />
+    <ProjectList projects={projects} onProjectRender={onProjectRender} />
   )
 }
 
-const ProjectList = ({ projects, actions }) => {
+const ProjectList = ({projects, onProjectRender}) => {
   return (
     <Grid>
-      {projects.map((project) => <Project key={project.id} data={project} />)}
+      {projects.map(onProjectRender)}
     </Grid>
   )
 }
@@ -49,9 +52,31 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <Grid fullWidth>
-      <FavoriteProjects projects={[]} />
-      <ProjectList projects={Object.values(projects)} />
+    <Grid fullwidth>
+      <FavoriteProjects projects={[]}
+        onProjectRender={(project) => {
+          return (
+            <Project key={project.id} data={project} />
+          )
+        }}
+      />
+      <ProjectList projects={Object.values(projects)}
+        onProjectRender={(project) => {
+          return (
+            <Project
+              key={project.id}
+              data={project}
+              actions={[{
+                icon: <FiClock />,
+                onClick: () => console.log('Log Time')
+              }, {
+                icon: <FiStar />,
+                onClick: () => console.log('Starred')
+              }]}
+            />
+          )
+        }}
+      />
     </Grid>
   )
 }

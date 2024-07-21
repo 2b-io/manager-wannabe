@@ -4,7 +4,7 @@ const Grid = styled.div`
   display: grid;
   grid-gap: 2rem;
 
-  ${({fullWidth}) => fullWidth && `
+  ${({fullwidth}) => fullwidth && `
     grid-template-columns: minmax(0, 1fr);
   ` || `
     @media (min-width: 768px) {
