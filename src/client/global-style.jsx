@@ -44,12 +44,12 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-size: 2rem;
-    line-height: 3rem;
+    line-height: 4rem;
+  }
 
-    * {
-      font-size: inherit;
-      line-height: inherit;
-    }
+  h1, h2, h3, h4, h5, h6, p, span, button, a {
+    font-size: inherit;
+    line-height: inherit;
   }
 `
 

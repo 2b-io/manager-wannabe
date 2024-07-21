@@ -2,10 +2,12 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
   projects: {
-    'abc': {
+    0: {
+      id: 0,
       name: 'CW'
     },
-    'xxx': {
+    1: {
+      id: 1,
       name: 'BodyFriend'
     }
   }
