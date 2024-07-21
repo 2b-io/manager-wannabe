@@ -1,17 +1,21 @@
-import React, {useEffect} from 'react'
+import React, {
+  useEffect,
+  useState
+} from 'react'
+import {FiClock} from 'react-icons/fi'
+import {FiStar} from 'react-icons/fi'
 import {useDispatch, useSelector} from 'react-redux'
-import {useOutletContext} from 'react-router-dom'
 
 import EmptyState from 'components/empty-state'
 import Grid from 'components/grid'
 import {project} from 'state/actions'
 
-import {FiClock} from 'react-icons/fi';
-import {FiStar} from 'react-icons/fi'
-
 import Project from './project'
+import TimeLog from './time-log'
 
 const FavoriteProjects = ({projects, onProjectRender}) => {
+  return null
+
   if (!projects || !projects.length) {
     return (
       <EmptyState>
@@ -35,49 +39,48 @@ const ProjectList = ({projects, onProjectRender}) => {
 }
 
 const Dashboard = () => {
-  const {user} = useOutletContext()
   const dispatch = useDispatch()
   const projects = useSelector((state) => state.project.projects)
-
-  useEffect(() => {
-    dispatch(project.add({
-      projects: [{
-        id: 3,
-        name: ' Mobile CommerceMobile CommerceMobile CommerceMobile CommerceMobile CommerceMobile CommerceMobile Commerce'
-      }, {
-        id: 4,
-        name: 'Rebuild Website'
-      }]
-    }))
-  }, [])
+  const [timeLogFor, setTimeLogFor] = useState(1)
 
   return (
-    <Grid fullWidth>
-      <FavoriteProjects projects={[]}
-        onProjectRender={(project) => {
-          return (
-            <Project key={project.id} data={project} />
-          )
-        }}
-      />
-      <ProjectList projects={Object.values(projects)}
-        onProjectRender={(project) => {
-          return (
-            <Project
-              key={project.id}
-              data={project}
-              actions={[{
-                icon: <FiClock />,
-                onClick: () => console.log('Log Time')
-              }, {
-                icon: <FiStar />,
-                onClick: () => console.log('Starred')
-              }]}
-            />
-          )
-        }}
-      />
-    </Grid>
+    <React.Fragment>
+      <Grid fullWidth>
+        <FavoriteProjects projects={[]}
+          onProjectRender={(project) => {
+            return (
+              <Project key={project.id} data={project} />
+            )
+          }}
+        />
+        <ProjectList projects={Object.values(projects)}
+          onProjectRender={(project) => {
+            return (
+              <Project
+                key={project.id}
+                data={project}
+                actions={[{
+                  icon: <FiClock />,
+                  onClick: () => setTimeLogFor(project.id)
+                }, {
+                  icon: <FiStar />,
+                  onClick: () => console.log('Starred')
+                }]}
+              />
+            )
+          }}
+        />
+      </Grid>
+      {timeLogFor && (
+        <TimeLog
+          projects={projects}
+          initialProjectId={timeLogFor}
+          onCloseClick={() => setTimeLogFor(null)}
+          onOutsideClick={() => setTimeLogFor(null)}
+          onSubmit={(timeLog) => console.log(timeLog)}
+        />
+      )}
+    </React.Fragment>
   )
 }
 

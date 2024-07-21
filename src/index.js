@@ -39,6 +39,13 @@ const main = async () => {
     return res.json(req.user)
   })
 
+  app.get('/api/projects', (req, res, next) => {
+    return res.json([
+      {id: 1, name: 'CW'},
+      {id: 2, name: 'BodyFriend'}
+    ])
+  })
+
   const PORT = process.env.PORT_API || 3001
 
   app.listen(PORT, () => {

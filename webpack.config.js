@@ -35,7 +35,8 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       components: path.join(root, 'src/client/components'),
-      state: path.join(root, 'src/client/state')
+      state: path.join(root, 'src/client/state'),
+      services: path.join(root, 'src/client/services')
     }
   },
   module: {
@@ -60,7 +61,7 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(png|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
         type: 'asset/resource'
       }
     ]

@@ -1,8 +1,15 @@
 import styled from 'styled-components'
 
 const Button = styled.button`
-  width: 100%;
+  appearance: none;
   display: inline-block;
+  min-width: 12rem;
+  border: none;
+  border-radius: 1rem;
+  height: 4rem;
+  padding: 0 1rem;
+  color: white;
+  background: black;
 `
 
 export default Button

@@ -1,19 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {takeEvery} from 'redux-saga/effects'
+import {
+  call,
+  put,
+  takeEvery
+} from 'redux-saga/effects'
+
+import {fetchProjects} from 'services/api'
 
 import actionCreatorFactory from './action-creator-factory'
 
 const initialState = {
-  projects: {
-    0: {
-      id: 0,
-      name: 'CW'
-    },
-    1: {
-      id: 1,
-      name: 'BodyFriend'
-    }
-  }
+  projects: {}
 }
 
 const slide = createSlice({
@@ -38,6 +35,8 @@ export const actions = {
 // saga
 export const saga = function* () {
   yield takeEvery(actions.fetchProjects.type, function* (action) {
-    console.log(action)
+    const projects = yield call(fetchProjects)
+
+    yield put(actions.add({projects}))
   })
 }
