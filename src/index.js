@@ -39,11 +39,13 @@ const main = async () => {
     return res.json(req.user)
   })
 
-  app.get('/api/projects', (req, res, next) => {
-    return res.json([
-      {id: 1, name: 'CW'},
-      {id: 2, name: 'BodyFriend'}
-    ])
+  app.get('/api/projects', async (req, res, next) => {
+    const db = req.app.get('db')
+    const {Project} = db.models
+
+    const projects = await Project.find()
+
+    return res.json(projects)
   })
 
   app.get('/api/timelogs', async (req, res, next) => {

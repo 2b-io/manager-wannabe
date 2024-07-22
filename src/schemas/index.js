@@ -1,7 +1,9 @@
-import TimelogSchema from './timelog'
-import UserSchema from './user'
+import Project from './project'
+import Timelog from './timelog'
+import User from './user'
 
 export default {
-  Timelog: TimelogSchema,
-  User: UserSchema
+  Project,
+  Timelog,
+  User
 }

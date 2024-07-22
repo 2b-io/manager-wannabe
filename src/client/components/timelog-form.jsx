@@ -35,18 +35,17 @@ const TimelogForm = ({
       <Form.ItemGroup>
         <Form.Item>
           <Form.Label>Project</Form.Label>
-          <Form.Select
+          <Form.Select required
             value={selectedProjectId}
             onInput={(e) => setSelectedProjectId(e.target.value)}>
             {sortedProjects.map((project) => {
               return (
-                <option key={project.id}
-                  value={project.id}>
+                <option key={project._id}
+                  value={project._id}>
                   {project.name}
                 </option>
               )
             })}
-            <option value={0}>Other</option>
           </Form.Select>
         </Form.Item>
         <Form.Item>
@@ -73,9 +72,8 @@ const TimelogForm = ({
           />
         </Form.Item>
         <Form.Item>
-          <Form.Label>Spent</Form.Label>
+          <Form.Label>Spent (Hours)</Form.Label>
           <Form.TextBox
-            placeholder="Use the format: 2w 4d 6h 45m"
             value={spent}
             onInput={(e) => setSpent(e.target.value)}
           />

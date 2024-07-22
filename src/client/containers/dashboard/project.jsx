@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Card from 'components/card'
+import Text from 'components/text'
 
 const Wrapper = styled.div`
 `
@@ -11,20 +12,21 @@ const Project = ({
   data: project
 }) => {
   return (
-    <Wrapper>
-      <Card>
-        <Card.Header>
-          <h2>{project.name}</h2>
-          {actions.map((action, index) => {
-            return (
-              <Card.HeaderAction key={index} onClick={action.onClick}>
-                {action.icon}
-              </Card.HeaderAction>
-            )
-          })}
-        </Card.Header>
-      </Card>
-    </Wrapper>
+    <Card highlighted>
+      <Card.Header>
+        <Text.SectionTitle>{project.name}</Text.SectionTitle>
+        {actions.map((action, index) => {
+          return (
+            <Card.HeaderAction key={index} onClick={action.onClick}>
+              {action.icon}
+            </Card.HeaderAction>
+          )
+        })}
+      </Card.Header>
+      <Card.Content>
+        <h1>xxx</h1>
+      </Card.Content>
+    </Card>
   )
 }
 

@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Card = styled.div`
+const Card = styled(({highlighted, ...props}) => <div {...props} />)`
   border-radius: 1rem;
   overflow: hidden;
+  ${({highlighted}) => highlighted && `
+    outline: 2px solid whitesmoke;
+  `}
 `
 
 Card.Header = styled.div`

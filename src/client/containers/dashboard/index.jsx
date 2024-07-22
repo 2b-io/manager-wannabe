@@ -9,19 +9,17 @@ import {useDispatch, useSelector} from 'react-redux'
 import EmptyState from 'components/empty-state'
 import Grid from 'components/grid'
 import Modal from 'components/modal'
+import Text from 'components/text'
 import TimelogForm from 'components/timelog-form'
 import {timelog} from 'state/actions'
 
 import Project from './project'
 
 const FavoriteProjects = ({projects, onProjectRender}) => {
-  return null
-
   if (!projects || !projects.length) {
     return (
       <EmptyState>
-        <p>You didn't favor any projects yet.</p>
-        <p>Please consider add some for quick accessing.</p>
+        <Text>You didn't star any projects yet.</Text>
       </EmptyState>
     )
   }
@@ -45,24 +43,36 @@ const Dashboard = () => {
   const [timeLogFor, setTimeLogFor] = useState()
 
   return (
-    <React.Fragment>
+    <Grid fullWidth loose>
+      <Grid>
+        <Grid fullWidth>
+          <Text.PageTitle>Timelog Analysis</Text.PageTitle>
+          <EmptyState>
+            <Text>Coming Soon.</Text>
+          </EmptyState>
+        </Grid>
+        <Grid fullWidth>
+          <Text.PageTitle>Starred Projects</Text.PageTitle>
+          <FavoriteProjects projects={[]}
+            onProjectRender={(project) => {
+              return (
+                <Project key={project._id} data={project} />
+              )
+            }}
+          />
+        </Grid>
+      </Grid>
       <Grid fullWidth>
-        <FavoriteProjects projects={[]}
-          onProjectRender={(project) => {
-            return (
-              <Project key={project.id} data={project} />
-            )
-          }}
-        />
+        <Text.PageTitle>All Projects</Text.PageTitle>
         <ProjectList projects={Object.values(projects)}
           onProjectRender={(project) => {
             return (
               <Project
-                key={project.id}
+                key={project._id}
                 data={project}
                 actions={[{
                   icon: <FiClock />,
-                  onClick: () => setTimeLogFor(project.id)
+                  onClick: () => setTimeLogFor(project._id)
                 // }, {
                 //   icon: <FiStar />,
                 //   onClick: () => console.log('Starred')
@@ -93,7 +103,7 @@ const Dashboard = () => {
           onOutsideClick={() => setTimeLogFor(null)}
         />
       )}
-    </React.Fragment>
+    </Grid>
   )
 }
 

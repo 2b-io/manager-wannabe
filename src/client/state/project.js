@@ -20,7 +20,7 @@ const slide = createSlice({
   reducers: {
     add: (state, action) => {
       (action.payload.projects || []).forEach((project) => {
-        state.projects[project.id] = project
+        state.projects[project._id] = project
       })
     }
   }

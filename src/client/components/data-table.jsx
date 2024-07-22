@@ -20,7 +20,7 @@ const RowAction = styled.button`
 const Wrapper = styled.div`
   border-radius: 1rem;
   overflow: hidden;
-  outline: 2px solid #ccc;
+  outline: 2px solid whitesmoke;
 `
 
 const Table = styled.table`
@@ -32,7 +32,7 @@ const Table = styled.table`
 
 Table.Header = styled.thead`
   & > tr > td {
-    background: #ccc;
+    background: whitesmoke;
   }
 `
 
@@ -40,9 +40,6 @@ Table.Body = styled.tbody`
 `
 
 Table.Row = styled.tr`
-  &:nth-child(even) {
-    background: whitesmoke;
-  }
 `
 
 Table.Cell = styled(

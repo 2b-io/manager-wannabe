@@ -6,9 +6,17 @@ const schema = new mongoose.Schema({
     required: true,
     index: true
   },
-  projectId: String,
-  date: Date,
-  spent: String,
+  projectId: {
+    type: mongoose.Types.ObjectId
+  },
+  date: {
+    type: Date,
+    required: true
+  },
+  spent: {
+    type: Number,
+    required: true
+  },
   workType: String,
   workDescription: String,
   forceUnlocked: {

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const Text = styled.p`
 `
 
-Text.PageTitle = styled.h1`
+Text.PageTitle = styled.h2`
   font-size: 3rem;
   line-height: 4rem;
 `

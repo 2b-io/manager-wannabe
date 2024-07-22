@@ -2,10 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Grid = styled(
-  ({fullWidth, ...props}) => <div {...props} />
+  ({fullWidth, loose, ...props}) => <div {...props} />
 )`
   display: grid;
-  grid-gap: 2rem;
+  ${({loose}) => loose ? `
+    grid-gap: 4rem;
+  ` : `
+    grid-gap: 2rem;
+  `}
+  
 
   ${({fullWidth}) => fullWidth && `
     grid-template-columns: minmax(0, 1fr);
