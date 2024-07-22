@@ -22,10 +22,10 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 64rem;
-  margin: 2rem;
   border-radius: 1rem;
   background: white;
   z-index: 2;
+  box-shadow: 0 0 1rem black;
 `
 
 const Modal = ({

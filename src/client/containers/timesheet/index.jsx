@@ -1,8 +1,9 @@
 import dateFormat from 'dateformat'
+import ms from 'ms'
 import React, {useState} from 'react'
 import {
-  FiAlignLeft,
-  FiEdit3
+  FiEdit3,
+  FiLock
 } from "react-icons/fi"
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
@@ -54,10 +55,18 @@ const Timesheet = () => {
   }]
 
   const rowActions = [
-    (row) => ({
-      icon: <FiEdit3 />,
-      action: () => setSelectedTimelog(row)
-    })
+    (row) => {
+      const canEdit = row.forceUnlocked ||
+        (new Date(row.date).getTime() + ms('7d') > Date.now())
+
+      return canEdit ? ({
+        icon: <FiEdit3 />,
+        action: () => setSelectedTimelog(row)
+      }) : ({
+        icon: <FiLock />,
+        disabled: true
+      })
+    }
   ]
 
   return (

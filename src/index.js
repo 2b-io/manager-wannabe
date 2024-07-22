@@ -77,7 +77,10 @@ const main = async () => {
     const db = req.app.get('db')
     const {Timelog} = db.models
 
-    const timelog = await Timelog.findByIdAndUpdate(req.params.id, req.body, {
+    const timelog = await Timelog.findByIdAndUpdate(req.params.id, {
+      ...req.body,
+      forceUnlocked: false
+    }, {
       new: true
     })
 

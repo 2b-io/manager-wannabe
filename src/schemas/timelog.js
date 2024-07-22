@@ -10,7 +10,11 @@ const schema = new mongoose.Schema({
   date: Date,
   spent: String,
   workType: String,
-  workDescription: String
+  workDescription: String,
+  forceUnlocked: {
+    type: Boolean,
+    default: () => false
+  }
 }, {
   timestamps: true
 })

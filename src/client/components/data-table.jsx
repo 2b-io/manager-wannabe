@@ -10,7 +10,11 @@ const RowAction = styled.button`
   border: none;
   outline: none;
   background: transparent;
-  cursor: pointer;
+  ${({disabled}) => disabled ? `
+    cursor: not-allowed;
+  ` : `
+    cursor: pointer;
+  `}
 `
 
 const Wrapper = styled.div`
@@ -80,10 +84,21 @@ const DataTable = ({
                 {rowActions.length && (
                   <Table.Cell minimal>
                     {rowActions.map((actionCreator, index) => {
-                      const {icon, action} = actionCreator(row)
+                      const data = actionCreator(row)
+
+                      if (!data) {
+                        return null
+                      }
+
+                      const {icon, action, disabled} = data
 
                       return (
-                        <RowAction key={index} onClick={action}>{icon}</RowAction>
+                        <RowAction
+                          key={index}
+                          onClick={action}
+                          disabled={disabled}>
+                          {icon}
+                        </RowAction>
                       )
                     })}
                   </Table.Cell>

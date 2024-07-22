@@ -36,7 +36,7 @@ Form.TextBox = styled.input.attrs(() => ({
   padding: 0 1rem;
   margin: 0;
   width: 100%;
-  line-height: 4rem;
+  height: 4rem;
   border: 1px solid #333;
   border-radius: 1rem;
   outline: none;
@@ -80,10 +80,10 @@ Form.DatePicker = styled.input.attrs(() => ({
 }))`
   appearance: none;
   display: block;
-  padding: 0 4rem 0 1rem;
+  padding: 0 1rem;
   margin: 0;
   width: 100%;
-  line-height: 4rem;
+  height: 4rem;
   border: 1px solid #333;
   border-radius: 1rem;
   outline: none;
