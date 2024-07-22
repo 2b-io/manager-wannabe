@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 const Text = styled.p`
+  line-height: 3rem;
 `
 
 Text.PageTitle = styled.h2`

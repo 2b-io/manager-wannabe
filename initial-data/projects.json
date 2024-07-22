@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Coway Phase 4",
+    "sales": ["longlh@2-b.io"],
+    "status": "IN_CONVERSATION"
+  },
+  {
+    "name": "BodyFriend",
+    "sales": ["phuongntb@2-b.io"],
+    "status": "IN_DEVELOPMENT"
+  },
+  {
+    "name": "CJO HCM",
+    "sales": ["longlh@2-b.io", "phuongntb@2-b.io"],
+    "status": "IN_CONVERSATION"
+  }
+]

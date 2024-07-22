@@ -9,7 +9,10 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {createSelector} from 'reselect'
 
+import Button from 'components/button'
+import Card from 'components/card'
 import DataTable from 'components/data-table'
+import EmptyState from 'components/empty-state'
 import Grid from 'components/grid'
 import Modal from 'components/modal'
 import Text from 'components/text'
@@ -72,32 +75,43 @@ const Timesheet = () => {
   ]
 
   return (
-    <Grid fullWidth>
-      <Text.PageTitle>Timesheet</Text.PageTitle>
-      <DataTable
-        keyField="_id"
-        columns={columns}
-        data={timelogs}
-        rowActions={rowActions}
-      />
-      {selectedTimelog && (
-        <Modal
-          title="Edit timelog"
-          component={(
-            <TimelogForm
-              projects={projects}
-              initialData={selectedTimelog}
-              onSubmit={(data) => {
-                dispatch(timelog.update(data))
-                setSelectedTimelog(null)
-              }}
-            />
-          )}
-          onCloseClick={() => setSelectedTimelog(null)}
-          onOutsideClick={() => setSelectedTimelog(null)}
-        />
-      )}
-    </Grid>
+    <Card loose>
+      <Card.Header>
+        <Text.PageTitle>Timesheet</Text.PageTitle>
+        <Button>Log Time</Button>
+      </Card.Header>
+      <Card.Content>
+        {timelogs.length > 0 && (
+          <DataTable
+            keyField="_id"
+            columns={columns}
+            data={timelogs}
+            rowActions={rowActions}
+          />
+        ) || (
+          <EmptyState>
+            <Text>You don't have any timelog.</Text>
+          </EmptyState>
+        )}
+        {selectedTimelog && (
+          <Modal
+            title="Edit timelog"
+            component={(
+              <TimelogForm
+                projects={projects}
+                initialData={selectedTimelog}
+                onSubmit={(data) => {
+                  dispatch(timelog.update(data))
+                  setSelectedTimelog(null)
+                }}
+              />
+            )}
+            onCloseClick={() => setSelectedTimelog(null)}
+            onOutsideClick={() => setSelectedTimelog(null)}
+          />
+        )}
+      </Card.Content>
+    </Card>
   )
 }
 

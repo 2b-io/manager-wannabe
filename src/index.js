@@ -41,11 +41,39 @@ const main = async () => {
 
   app.get('/api/projects', async (req, res, next) => {
     const db = req.app.get('db')
-    const {Project} = db.models
+    const {Project, User} = db.models
 
     const projects = await Project.find()
 
-    return res.json(projects)
+    const emails = projects.reduce((emailMap, project) => {
+      project.sales.forEach((email) => emailMap[email] = true)
+
+      return emailMap
+    }, {})
+
+    const sales = await User.find({
+      email: {
+        $in: Object.keys(emails)
+      }
+    })
+
+    const salesMap = sales.reduce((map, sales) => ({
+      ...map,
+      [sales.email]: sales
+    }), {})
+
+    // merge
+    const plainProjects = projects.map((project) => {
+      const plainObject = project.toJSON()
+
+      plainObject.sales = plainObject.sales.map(
+        (email) => salesMap[email]?.toJSON() || {email}
+      )
+
+      return plainObject
+    })
+
+    return res.json(plainProjects)
   })
 
   app.get('/api/timelogs', async (req, res, next) => {

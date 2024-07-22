@@ -5,6 +5,7 @@ const schema = new mongoose.Schema({
     type: String,
     unique: true
   },
+  defaultWorkType: String,
   profiles: Object
 }, {
   timestamps: true

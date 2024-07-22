@@ -25,6 +25,7 @@ Menu.Item = styled.div`
   }
 
   a {
+    background: transparent;
     color: inherit;
     line-height: 4rem;
     text-decoration: none;

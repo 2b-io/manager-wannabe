@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Text from 'components/text'
+
 const RowAction = styled.button`
   appearance: none;
   width: 3rem;
@@ -24,7 +26,7 @@ const Wrapper = styled.div`
 `
 
 const Table = styled.table`
-  line-height: 4rem;
+  line-height: 3rem;
   border-collapse: collapse;
   width: 100%;
   table-layout: fixed;
@@ -46,11 +48,14 @@ Table.Cell = styled(
   ({minimal, ...props}) => <td {...props} />
 )`
   padding: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   ${({minimal}) => minimal && `
     white-space: nowrap;
-    text-align: right;
-    width: 8rem;
+    text-align: center;
+    width: 5rem;
+    padding: 0;
   `}
 `
 
@@ -65,7 +70,11 @@ const DataTable = ({
       <Table>
         <Table.Header>
           <Table.Row>
-            {columns.map((col) => <Table.Cell key={col.for}>{col.title}</Table.Cell>)}
+            {columns.map((col) => (
+              <Table.Cell key={col.for}>
+                {col.title}
+              </Table.Cell>
+            ))}
             {rowActions.length && (<Table.Cell minimal />)}
           </Table.Row>
         </Table.Header>
