@@ -6,7 +6,7 @@ import {
   FiLock
 } from "react-icons/fi"
 import {useDispatch, useSelector} from 'react-redux'
-import {useParams} from 'react-router-dom'
+import {useOutletContext} from 'react-router-dom'
 import {createSelector} from 'reselect'
 
 import Button from 'components/button'
@@ -34,8 +34,10 @@ const Timesheet = () => {
     timelogs
   } = useSelector(selector)
   const dispatch = useDispatch()
+  const {user} = useOutletContext()
 
   const [selectedTimelog, setSelectedTimelog] = useState(null)
+  const [showLogTime, setShowLogTime] = useState(false)
 
   const columns = [{
     for: 'date',
@@ -78,7 +80,7 @@ const Timesheet = () => {
     <Card loose>
       <Card.Header>
         <Text.PageTitle>Timesheet</Text.PageTitle>
-        <Button>Log Time</Button>
+        <Button onClick={() => setShowLogTime(true)}>Log Time</Button>
       </Card.Header>
       <Card.Content>
         {timelogs.length > 0 && (
@@ -108,6 +110,27 @@ const Timesheet = () => {
             )}
             onCloseClick={() => setSelectedTimelog(null)}
             onOutsideClick={() => setSelectedTimelog(null)}
+          />
+        )}
+        {showLogTime && (
+          <Modal
+            title="Log Time"
+            component={(
+              <TimelogForm
+                projects={projects}
+                initialData={{
+                  date: new Date(),
+                  spent: '',
+                  workType: user.defaultWorkType
+                }}
+                onSubmit={(data) => {
+                  dispatch(timelog.create(data))
+                  setShowLogTime(false)
+                }}
+              />
+            )}
+            onCloseClick={() => setShowLogTime(false)}
+            onOutsideClick={() => setShowLogTime(false)}
           />
         )}
       </Card.Content>

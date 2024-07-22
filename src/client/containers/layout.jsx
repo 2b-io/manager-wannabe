@@ -30,6 +30,7 @@ Menu.Item = styled.div`
     line-height: 4rem;
     text-decoration: none;
     min-width: auto;
+    padding: 0;
   }
 `
 

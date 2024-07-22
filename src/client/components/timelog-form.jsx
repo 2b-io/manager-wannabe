@@ -11,7 +11,7 @@ const TimelogForm = ({
   onSubmit,
 }) => {
   const sortedProjects = Object.values(projects)
-  const [selectedProjectId, setSelectedProjectId] = useState(initialData.projectId)
+  const [selectedProjectId, setSelectedProjectId] = useState(initialData.projectId || sortedProjects[0]?._id)
   const [workType, setWorkType] = useState(initialData.workType)
   const [date, setDate] = useState(new Date(initialData.date))
   const [spent, setSpent] = useState(initialData.spent)

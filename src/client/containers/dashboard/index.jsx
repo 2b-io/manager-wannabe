@@ -5,6 +5,7 @@ import React, {
 import {FiClock} from 'react-icons/fi'
 import {FiStar} from 'react-icons/fi'
 import {useDispatch, useSelector} from 'react-redux'
+import {useOutletContext} from 'react-router-dom'
 
 import Card from 'components/card'
 import EmptyState from 'components/empty-state'
@@ -41,6 +42,8 @@ const ProjectList = ({projects, onProjectRender}) => {
 const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector((state) => state.project.projects)
+
+  const {user} = useOutletContext()
   const [timeLogFor, setTimeLogFor] = useState()
 
   return (
@@ -104,7 +107,8 @@ const Dashboard = () => {
               initialData={{
                 projectId: timeLogFor,
                 date: new Date(),
-                spent: ''
+                spent: '',
+                workType: user.defaultWorkType
               }}
               onSubmit={(data) => {
                 dispatch(timelog.create(data))
