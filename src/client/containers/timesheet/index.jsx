@@ -38,7 +38,9 @@ const Timesheet = () => {
     for: 'date',
     title: 'Date',
     transform: (data, row) => {
-      return dateFormat(data, 'ddd, mmm dS, yyyy')
+      const date = new Date(data)
+
+      return dateFormat(date, 'yyyy/mm/dd')
     }
   }, {
     for: 'projectId',
