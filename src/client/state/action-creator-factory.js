@@ -1,10 +1,12 @@
-export default (type) => {
+export default (name) => (type) => {
+  const actionType = `${name}/${type}`
+
   const actionCreate = (payload) => ({
-    type,
+    type: actionType,
     payload
   })
 
-  actionCreate.type = type
+  actionCreate.type = actionType
 
   return actionCreate
 }

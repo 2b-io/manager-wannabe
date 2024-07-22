@@ -9,6 +9,10 @@ import {
   reducer as projectReducer,
   saga as projectSaga
 } from './project'
+import {
+  reducer as timelogReducer,
+  saga as timelogSaga
+} from './timelog'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -18,12 +22,14 @@ export default configureStore({
     sagaMiddleware
   ],
   reducer: {
-    project: projectReducer
+    project: projectReducer,
+    timelog: timelogReducer
   }
 })
 
 sagaMiddleware.run(function* root() {
   yield all([
-    projectSaga()
+    projectSaga(),
+    timelogSaga()
   ])
 })

@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Card from 'components/card'
 
 const Wrapper = styled.div`
-  background: whitesmoke;
 `
 
 const Project = ({

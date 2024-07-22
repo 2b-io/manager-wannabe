@@ -6,22 +6,23 @@ import {
   takeEvery
 } from 'redux-saga/effects'
 
-import {fetchProjects} from 'services/api'
+import {
+  createTimelog,
+  fetchTimelogs
+} from 'services/api'
 
 import actionCreatorFactory from './action-creator-factory'
 
 const initialState = {
-  projects: {}
+  timelogs: []
 }
 
 const slide = createSlice({
-  name: 'project',
+  name: 'timelog',
   initialState,
   reducers: {
     add: (state, action) => {
-      (action.payload.projects || []).forEach((project) => {
-        state.projects[project.id] = project
-      })
+      state.timelogs.push(...action.payload.timelogs)
     }
   }
 })
@@ -30,16 +31,26 @@ export const reducer = slide.reducer
 export const actions = {
   ...slide.actions,
   // other actions that don't change state
-  fetch: actionCreatorFactory(slide.name)('fetch')
+  create: actionCreatorFactory(slide.name)('create'),
+  fetch: actionCreatorFactory(slide.name)('timelog')
 }
 
 // saga
 export const saga = function* () {
   yield all([
-    takeEvery(actions.fetch.type, function* (action) {
-      const projects = yield call(fetchProjects)
+    takeEvery(actions.create.type, function* (action) {
+      const timelog = yield call(createTimelog, action.payload)
 
-      yield put(actions.add({projects}))
+      yield put(actions.add({
+        timelogs: [timelog]
+      }))
+    }),
+    takeEvery(actions.fetch.type, function* (action) {
+      const timelogs = yield call(fetchTimelogs)
+
+      yield put(actions.add({
+        timelogs
+      }))
     })
   ])
 }

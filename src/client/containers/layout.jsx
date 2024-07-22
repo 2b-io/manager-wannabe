@@ -15,20 +15,20 @@ const Nav = styled.nav`
 
 const Menu = styled(Container)`
   display: flex;
+  grid-gap: 2rem;
 `
 
 Menu.Item = styled.div`
-  &:not(:last-child) {
-    margin-right: 2rem;
-  }
-
   &:last-child {
     margin-left: auto;
+    text-align: right;
   }
 
   a {
     color: inherit;
+    line-height: 4rem;
     text-decoration: none;
+    min-width: auto;
   }
 `
 
@@ -41,7 +41,7 @@ const Layout = () => {
             <Button as={Link} to="/">Dashboard</Button>
           </Menu.Item>
           <Menu.Item>
-            <Button as={Link} to="/timesheet/100">Timesheet</Button>
+            <Button as={Link} to="/timesheet">Timesheet</Button>
           </Menu.Item>
           <Menu.Item>
             <Button as="a" href="/auth/logout">Logout</Button>

@@ -62,9 +62,7 @@ Form.Select = styled.select`
   }
 `
 
-Form.TextArea = styled.textarea.attrs(() => ({
-  rows: 5
-}))`
+Form.TextArea = styled.textarea.attrs(({rows = 3}) => ({rows}))`
   appearance: none;
   display: block;
   padding: 1rem;
@@ -82,7 +80,7 @@ Form.DatePicker = styled.input.attrs(() => ({
 }))`
   appearance: none;
   display: block;
-  padding: 0 1rem;
+  padding: 0 4rem 0 1rem;
   margin: 0;
   width: 100%;
   line-height: 4rem;

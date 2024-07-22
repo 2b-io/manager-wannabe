@@ -1,8 +1,10 @@
 import 'dotenv/config'
+import bodyParse from 'body-parser'
 import express from 'express'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
+import authMiddleware from './auth/middleware'
 import initPassport from './auth/passport'
 import createConnection from './services/database'
 
@@ -27,13 +29,11 @@ const main = async () => {
   // setup passport
   initPassport(app)
 
-  app.use('/api', (req, res, next) => {
-    if (!req.user) {
-      return res.sendStatus(401)
-    }
-
-    next()
+  const unauthorizedStrict = authMiddleware((req, res, next) => {
+    res.sendStatus(401)
   })
+
+  app.use('/api', unauthorizedStrict)
 
   app.get('/api/users/me', (req, res, next) => {
     return res.json(req.user)
@@ -44,6 +44,33 @@ const main = async () => {
       {id: 1, name: 'CW'},
       {id: 2, name: 'BodyFriend'}
     ])
+  })
+
+  app.get('/api/timelogs', async (req, res, next) => {
+    const db = req.app.get('db')
+    const {Timelog} = db.models
+
+    const timelogs = await Timelog.find({
+      email: req.user.email
+    })
+
+    return res.json(timelogs)
+  })
+
+  app.post('/api/timelogs', bodyParse.json(), async (req, res, next) => {
+    const db = req.app.get('db')
+    const {Timelog} = db.models
+
+    const data = {
+      ...req.body,
+      email: req.user.email
+    }
+
+    const timelog = data._id ? 
+      (await Timelog.findByIdAndUpdate(data._id, data, {new: true})) :
+      (await Timelog.create(data))
+
+    res.status(201).json(timelog)
   })
 
   const PORT = process.env.PORT_API || 3001

@@ -8,10 +8,11 @@ import {useDispatch, useSelector} from 'react-redux'
 
 import EmptyState from 'components/empty-state'
 import Grid from 'components/grid'
-import {project} from 'state/actions'
+import Modal from 'components/modal'
+import {timelog} from 'state/actions'
 
 import Project from './project'
-import TimeLog from './time-log'
+import Timelog from './timelog'
 
 const FavoriteProjects = ({projects, onProjectRender}) => {
   return null
@@ -41,7 +42,7 @@ const ProjectList = ({projects, onProjectRender}) => {
 const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector((state) => state.project.projects)
-  const [timeLogFor, setTimeLogFor] = useState(1)
+  const [timeLogFor, setTimeLogFor] = useState()
 
   return (
     <React.Fragment>
@@ -62,9 +63,9 @@ const Dashboard = () => {
                 actions={[{
                   icon: <FiClock />,
                   onClick: () => setTimeLogFor(project.id)
-                }, {
-                  icon: <FiStar />,
-                  onClick: () => console.log('Starred')
+                // }, {
+                //   icon: <FiStar />,
+                //   onClick: () => console.log('Starred')
                 }]}
               />
             )
@@ -72,12 +73,21 @@ const Dashboard = () => {
         />
       </Grid>
       {timeLogFor && (
-        <TimeLog
-          projects={projects}
-          initialProjectId={timeLogFor}
+        <Modal
+          title="Log Time"
+          component={(
+            <Timelog
+              projects={projects}
+              initialData={{
+                projectId: timeLogFor,
+                date: new Date(),
+                spent: ''
+              }}
+              onSubmit={(data) => dispatch(timelog.create(data))}
+            />
+          )}
           onCloseClick={() => setTimeLogFor(null)}
           onOutsideClick={() => setTimeLogFor(null)}
-          onSubmit={(timeLog) => console.log(timeLog)}
         />
       )}
     </React.Fragment>
