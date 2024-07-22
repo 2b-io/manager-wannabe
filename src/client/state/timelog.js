@@ -8,13 +8,14 @@ import {
 
 import {
   createTimelog,
-  fetchTimelogs
+  fetchTimelogs,
+  updateTimelog
 } from 'services/api'
 
 import actionCreatorFactory from './action-creator-factory'
 
 const initialState = {
-  timelogs: []
+  timelogs: {}
 }
 
 const slide = createSlice({
@@ -22,7 +23,9 @@ const slide = createSlice({
   initialState,
   reducers: {
     add: (state, action) => {
-      state.timelogs.push(...action.payload.timelogs)
+      (action.payload.timelogs || []).forEach((timelog) => {
+        state.timelogs[timelog._id] = timelog
+      })
     }
   }
 })
@@ -32,7 +35,8 @@ export const actions = {
   ...slide.actions,
   // other actions that don't change state
   create: actionCreatorFactory(slide.name)('create'),
-  fetch: actionCreatorFactory(slide.name)('timelog')
+  fetch: actionCreatorFactory(slide.name)('fetch'),
+  update: actionCreatorFactory(slide.name)('update'),
 }
 
 // saga
@@ -51,6 +55,13 @@ export const saga = function* () {
       yield put(actions.add({
         timelogs
       }))
+    }),
+    takeEvery(actions.update.type, function* (action) {
+      const timelog = yield call(updateTimelog, action.payload)
+
+      yield put(actions.add({
+        timelogs: [timelog]
+      })) 
     })
   ])
 }

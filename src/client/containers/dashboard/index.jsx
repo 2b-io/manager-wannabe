@@ -9,10 +9,10 @@ import {useDispatch, useSelector} from 'react-redux'
 import EmptyState from 'components/empty-state'
 import Grid from 'components/grid'
 import Modal from 'components/modal'
+import TimelogForm from 'components/timelog-form'
 import {timelog} from 'state/actions'
 
 import Project from './project'
-import Timelog from './timelog'
 
 const FavoriteProjects = ({projects, onProjectRender}) => {
   return null
@@ -76,14 +76,17 @@ const Dashboard = () => {
         <Modal
           title="Log Time"
           component={(
-            <Timelog
+            <TimelogForm
               projects={projects}
               initialData={{
                 projectId: timeLogFor,
                 date: new Date(),
                 spent: ''
               }}
-              onSubmit={(data) => dispatch(timelog.create(data))}
+              onSubmit={(data) => {
+                dispatch(timelog.create(data))
+                setTimeLogFor(null)
+              }}
             />
           )}
           onCloseClick={() => setTimeLogFor(null)}

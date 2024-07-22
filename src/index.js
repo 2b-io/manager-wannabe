@@ -73,6 +73,17 @@ const main = async () => {
     res.status(201).json(timelog)
   })
 
+  app.put('/api/timelogs/:id', bodyParse.json(), async (req, res, next) => {
+    const db = req.app.get('db')
+    const {Timelog} = db.models
+
+    const timelog = await Timelog.findByIdAndUpdate(req.params.id, req.body, {
+      new: true
+    })
+
+    res.status(201).json(timelog)
+  })
+
   const PORT = process.env.PORT_API || 3001
 
   app.listen(PORT, () => {

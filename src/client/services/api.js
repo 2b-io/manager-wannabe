@@ -28,3 +28,18 @@ export const fetchTimelogs = async () => {
 
   return timelogs
 }
+
+export const updateTimelog = async (data) => {
+  const res = await fetch(`/api/timelogs/${data._id}`, {
+    method: 'put',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+
+  const timelog = await res.json()
+
+  return timelog
+}

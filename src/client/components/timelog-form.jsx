@@ -5,7 +5,7 @@ import React, {
 import Button from 'components/button'
 import Form from 'components/form'
 
-const Timelog = ({
+const TimelogForm = ({
   projects,
   initialData = {},
   onSubmit,
@@ -13,7 +13,7 @@ const Timelog = ({
   const sortedProjects = Object.values(projects)
   const [selectedProjectId, setSelectedProjectId] = useState(initialData.projectId)
   const [workType, setWorkType] = useState(initialData.workType)
-  const [date, setDate] = useState(initialData.date)
+  const [date, setDate] = useState(new Date(initialData.date))
   const [spent, setSpent] = useState(initialData.spent)
   const [workDescription, setWorkDescription] = useState(initialData.workDescription)
 
@@ -21,9 +21,10 @@ const Timelog = ({
     e.preventDefault()
 
     onSubmit && onSubmit({
+      ...initialData,
       projectId: selectedProjectId,
       workType,
-      date,
+      date: date.toISOString(),
       spent,
       workDescription
     })
@@ -53,6 +54,7 @@ const Timelog = ({
           <Form.Select
             value={workType}
             onInput={(e) => setWorkType(e.target.value)}>
+            <option>-</option>
             <option value="sales">Sales</option>
             <option value="development">Development</option>
             <option value="testing">Testing</option>
@@ -93,4 +95,4 @@ const Timelog = ({
   )
 }
 
-export default Timelog
+export default TimelogForm

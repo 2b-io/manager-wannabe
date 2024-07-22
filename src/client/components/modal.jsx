@@ -4,6 +4,7 @@ import {FiX} from 'react-icons/fi'
 import styled from 'styled-components'
 
 import Card from 'components/card'
+import Text from 'components/text'
 
 const Overlay = styled.div`
   background: rgba(0, 0, 0, .5);
@@ -39,7 +40,7 @@ const Modal = ({
       <Container>
         <Card>
           <Card.Header>
-            <h3>{title}</h3>
+            <Text.SectionTitle>{title}</Text.SectionTitle>
             <Card.HeaderAction onClick={onCloseClick}>
               <FiX />
             </Card.HeaderAction>
