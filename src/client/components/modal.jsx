@@ -17,11 +17,12 @@ const Overlay = styled.div`
 `
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 64rem;
+  min-width: 40rem;
+  max-width: 64rem;
   border-radius: 1rem;
   background: white;
   z-index: 2;

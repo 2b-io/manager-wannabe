@@ -21,7 +21,7 @@ const initPassport = (app) => {
       }
     }, {
       new: true,
-      upsert: true
+      upsert: false
     })
 
     done(null, user)

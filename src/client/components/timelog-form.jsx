@@ -72,8 +72,9 @@ const TimelogForm = ({
           />
         </Form.Item>
         <Form.Item>
-          <Form.Label>Spent</Form.Label>
+          <Form.Label>Spent (1d = 8h)</Form.Label>
           <Form.TextBox
+            placeholder="Format: 2w 4d 6h 45m"
             value={spent}
             onInput={(e) => setSpent(e.target.value)}
           />
