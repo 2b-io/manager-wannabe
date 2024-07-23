@@ -55,6 +55,7 @@ const TimelogForm = ({
             onInput={(e) => setWorkType(e.target.value)}>
             <option>-</option>
             <option value="sales">Sales</option>
+            <option value="presale">Presales</option>
             <option value="development">Development</option>
             <option value="testing">Testing</option>
             <option value="support">Support</option>
