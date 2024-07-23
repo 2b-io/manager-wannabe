@@ -53,7 +53,6 @@ const TimelogForm = ({
           <Form.Select
             value={workType}
             onInput={(e) => setWorkType(e.target.value)}>
-            <option>-</option>
             <option value="sales">Sales</option>
             <option value="presale">Presales</option>
             <option value="development">Development</option>

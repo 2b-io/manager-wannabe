@@ -23,6 +23,10 @@ const slide = createSlice({
   initialState,
   reducers: {
     add: (state, action) => {
+      if (action.payload.clearBeforeAdd) {
+        state.timelogs = {}
+      }
+
       (action.payload.timelogs || []).forEach((timelog) => {
         state.timelogs[timelog._id] = timelog
       })
@@ -53,7 +57,8 @@ export const saga = function* () {
       const timelogs = yield call(fetchTimelogs)
 
       yield put(actions.add({
-        timelogs
+        timelogs,
+        clearBeforeAdd: true
       }))
     }),
     takeEvery(actions.update.type, function* (action) {
