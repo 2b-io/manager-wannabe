@@ -7,7 +7,8 @@ const schema = new mongoose.Schema({
   sales: [String],
   status: {
     type: String
-  }
+  },
+  link: String
 }, {
   timestamps: true
 })

@@ -1,17 +1,56 @@
 [
   {
-    "name": "Coway Phase 4",
-    "sales": ["longlh@2-b.io"],
-    "status": "IN_CONVERSATION"
+    "name": "Bijules7 https://www.bijules.me/",
+    "sales": "thaohp@2-b.io",
+    "status": "IN DEVELOPMENT",
+    "link": "https://2bcontinued.atlassian.net/browse/BIZ-2341"
   },
   {
-    "name": "BodyFriend",
-    "sales": ["phuongntb@2-b.io"],
-    "status": "IN_DEVELOPMENT"
+    "name": "Bridge7 - Com2us",
+    "sales": "phuongntb@2-b.io",
+    "status": "IN DEVELOPMENT",
+    "link": "https://2bcontinued.atlassian.net/browse/BIZ-2333"
   },
   {
-    "name": "CJO HCM",
-    "sales": ["longlh@2-b.io", "phuongntb@2-b.io"],
-    "status": "IN_CONVERSATION"
+    "name": "Bridge7 - ABERDEEN (https://aberdeenwest.com/)",
+    "sales": "phuongntb@2-b.io",
+    "status": "IN DEVELOPMENT",
+    "link": "https://2bcontinued.atlassian.net/browse/BIZ-2323"
+  },
+  {
+    "name": "Bridge7 - Sculptor (https://sculptor-worldwide.com/)",
+    "sales": "thaohp@2-b.io",
+    "status": "IN DEVELOPMENT",
+    "link": "https://2bcontinued.atlassian.net/browse/BIZ-2313"
+  },
+  {
+    "name": "CabinZero2",
+    "sales": "thaohp@2-b.io",
+    "status": "IN DEVELOPMENT",
+    "link": "https://2bcontinued.atlassian.net/browse/BIZ-2310"
+  },
+  {
+    "name": "Bridge7 - BodyFriend (https://wn-bf.myshopify.com/)",
+    "sales": "phuongntb@2-b.io",
+    "status": "IN DEVELOPMENT",
+    "link": "https://2bcontinued.atlassian.net/browse/BIZ-2302"
+  },
+  {
+    "name": "Bridge7 - Rains.com (rains-ko.myshopify.com)",
+    "sales": "phuongntb@2-b.io",
+    "status": "IN DEVELOPMENT",
+    "link": "https://2bcontinued.atlassian.net/browse/BIZ-2294"
+  },
+  {
+    "name": "Avara 9 (https://avara-boutique.myshopify.com/)",
+    "sales": "phuongntb@2-b.io",
+    "status": "IN DEVELOPMENT",
+    "link": "https://2bcontinued.atlassian.net/browse/BIZ-2288"
+  },
+  {
+    "name": "Pearcompression https://pearcompression.com/",
+    "sales": "thaohp@2-b.io",
+    "status": "IN DEVELOPMENT",
+    "link": "https://2bcontinued.atlassian.net/browse/BIZ-2274"
   }
 ]
