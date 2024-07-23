@@ -44,14 +44,15 @@ const lib = {
   },
   toNumber: (timestr = '1000') => {
     const DEFAULT_TIME = '1h'
+    const opt = {
+      hoursPerDay: HOURS_PER_DAY,
+      daysPerWeek: DAYS_PER_WEEK
+    }
 
     try {
-      return timestring(timestr, 's', {
-        hoursPerDay: HOURS_PER_DAY,
-        daysPerWeek: DAYS_PER_WEEK
-      })
+      return timestring(timestr, 's', opt)
     } catch (e) {
-      return timestring(DEFAULT_TIME)
+      return timestring(DEFAULT_TIME, 's', opt)
     }
   }
 }
