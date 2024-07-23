@@ -1,12 +1,12 @@
 import timestring from 'timestring'
 
+const DAYS_PER_WEEK = 5
+const HOURS_PER_DAY = 8
+const MINUTES_PER_HOUR = 60
+const SECONDS_PER_MINUTE = 60
+
 const lib = {
   toString: (ms) => {
-    const DAYS_PER_WEEK = 5
-    const HOURS_PER_DAY = 8
-    const MINUTES_PER_HOUR = 60
-    const SECONDS_PER_MINUTE = 60
-
     const units = [{
       text: 'w',
       value: SECONDS_PER_MINUTE * MINUTES_PER_HOUR * HOURS_PER_DAY * DAYS_PER_WEEK
@@ -46,7 +46,10 @@ const lib = {
     const DEFAULT_TIME = '1h'
 
     try {
-      return timestring(timestr)
+      return timestring(timestr, 's', {
+        hoursPerDay: HOURS_PER_DAY,
+        daysPerWeek: DAYS_PER_WEEK
+      })
     } catch (e) {
       return timestring(DEFAULT_TIME)
     }

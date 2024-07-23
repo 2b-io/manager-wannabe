@@ -19,6 +19,10 @@ const slide = createSlice({
   initialState,
   reducers: {
     add: (state, action) => {
+      if (action.payload.clearBeforeAdd) {
+        state.projects = {}
+      }
+
       (action.payload.projects || []).forEach((project) => {
         state.projects[project._id] = project
       })
@@ -39,7 +43,10 @@ export const saga = function* () {
     takeEvery(actions.fetch.type, function* (action) {
       const projects = yield call(fetchProjects)
 
-      yield put(actions.add({projects}))
+      yield put(actions.add({
+        projects,
+        clearBeforeAdd: true
+      }))
     })
   ])
 }
