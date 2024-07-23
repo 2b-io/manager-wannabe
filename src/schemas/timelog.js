@@ -14,8 +14,11 @@ const schema = new mongoose.Schema({
     required: true
   },
   spent: {
-    type: Number,
+    type: String,
     required: true
+  },
+  spentAsSeconds: {
+    type: Number
   },
   workType: String,
   workDescription: String,

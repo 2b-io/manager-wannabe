@@ -7,6 +7,7 @@ import MongoStore from 'connect-mongo'
 import authMiddleware from './auth/middleware'
 import initPassport from './auth/passport'
 import createConnection from './services/database'
+import workingTime from './services/working-time'
 
 const main = async () => {
   const app = express()
@@ -96,6 +97,10 @@ const main = async () => {
       email: req.user.email
     }
 
+    data.spentAsSeconds = workingTime.toNumber(data.spent)
+    // normalize
+    data.spent = workingTime.toString(data.spentAsSeconds)
+
     const timelog = data._id ? 
       (await Timelog.findByIdAndUpdate(data._id, data, {new: true})) :
       (await Timelog.create(data))
@@ -107,10 +112,16 @@ const main = async () => {
     const db = req.app.get('db')
     const {Timelog} = db.models
 
-    const timelog = await Timelog.findByIdAndUpdate(req.params.id, {
+    const data = {
       ...req.body,
       forceUnlocked: false
-    }, {
+    }
+
+    data.spentAsSeconds = workingTime.toNumber(data.spent)
+    // normalize
+    data.spent = workingTime.toString(data.spentAsSeconds)
+
+    const timelog = await Timelog.findByIdAndUpdate(req.params.id, data, {
       new: true
     })
 
@@ -125,3 +136,5 @@ const main = async () => {
 }
 
 main()
+
+
