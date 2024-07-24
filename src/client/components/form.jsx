@@ -45,6 +45,7 @@ Form.TextBox = styled.input.attrs(() => ({
   border: 1px solid #333;
   border-radius: 1rem;
   outline: none;
+  text-align: left;
 `
 
 Form.Select = styled.select`
@@ -61,6 +62,7 @@ Form.Select = styled.select`
   background: url(${ChevronDownSvg});
   background-repeat: no-repeat;
   background-position: right 8px center;
+  text-align: left;
 
   & > option {
     line-height: 4rem;
@@ -78,6 +80,7 @@ Form.TextArea = styled.textarea.attrs(({rows = 3}) => ({rows}))`
   border: 1px solid #333;
   border-radius: 1rem;
   outline: none;
+  text-align: left;
 `
 
 Form.DatePicker = styled.input.attrs(() => ({
@@ -96,6 +99,7 @@ Form.DatePicker = styled.input.attrs(() => ({
   background: url(${CalendarSvg});
   background-repeat: no-repeat;
   background-position: right 8px center;
+  text-align: left;
 
   &::-webkit-calendar-picker-indicator, &::-webkit-inner-spin-button {
     opacity: 0;
