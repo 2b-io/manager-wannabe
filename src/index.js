@@ -44,37 +44,50 @@ const main = async () => {
     const db = req.app.get('db')
     const {Project, User} = db.models
 
-    const projects = await Project.find()
-
-    const emails = projects.reduce((emailMap, project) => {
-      project.sales.forEach((email) => emailMap[email] = true)
-
-      return emailMap
-    }, {})
-
-    const sales = await User.find({
-      email: {
-        $in: Object.keys(emails)
+    const projects = await Project.aggregate([{
+      $lookup: {
+        from: 'timelogs',
+        localField: '_id',
+        foreignField: 'projectId',
+        as: 'timelogs'
       }
-    })
+    }, {
+      $group: {
+        _id: '$_id',
+        totalSpentAsSeconds: {
+          $sum: {
+            $sum: '$timelogs.spentAsSeconds'
+          }
+        },
+        emails: {
+          $push: {
+            $first: '$timelogs.email'
+          }
+        },
+        name: {
+          $first: '$name'
+        },
+        status: {
+          $first: '$status'
+        },
+        link: {
+          $first: '$link'
+        }
+      }
+    }, {
+      $lookup: {
+        from: 'users',
+        localField: 'emails',
+        foreignField: 'email',
+        as: 'participants'
+      }
+    }, {
+      $sort: {
+        _id: 1
+      }
+    }])
 
-    const salesMap = sales.reduce((map, sales) => ({
-      ...map,
-      [sales.email]: sales
-    }), {})
-
-    // merge
-    const plainProjects = projects.map((project) => {
-      const plainObject = project.toJSON()
-
-      plainObject.sales = plainObject.sales.map(
-        (email) => salesMap[email]?.toJSON() || {email}
-      )
-
-      return plainObject
-    })
-
-    return res.json(plainProjects)
+    res.json(projects)
   })
 
   app.get('/api/timelogs', async (req, res, next) => {

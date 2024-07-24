@@ -1,14 +1,646 @@
-[
-  {
-    "email": "longlh@2-b.io",
-    "defaultWorkType": "sales"
+[{
+  "_id": {
+    "$oid": "669e7267f18b4a1b9d51ab12"
   },
-  {
-    "email": "phuongntb@2-b.io",
-    "defaultWorkType": "sales"
+  "email": "longlh@2-b.io",
+  "defaultWorkType": "sales",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "113227587874433147952",
+      "id": "113227587874433147952",
+      "displayName": "Long Luc",
+      "name": {
+        "givenName": "Long",
+        "familyName": "Luc"
+      },
+      "given_name": "Long",
+      "family_name": "Luc",
+      "email_verified": true,
+      "verified": true,
+      "email": "longlh@2-b.io",
+      "emails": [
+        {
+          "value": "longlh@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocICtq1wLeIK-OFORG-nkycmg_x9RhoASl8oGasraW0A7rpLrss=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocICtq1wLeIK-OFORG-nkycmg_x9RhoASl8oGasraW0A7rpLrss=s96-c",
+      "_raw": "{\n  \"sub\": \"113227587874433147952\",\n  \"name\": \"Long Luc\",\n  \"given_name\": \"Long\",\n  \"family_name\": \"Luc\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocICtq1wLeIK-OFORG-nkycmg_x9RhoASl8oGasraW0A7rpLrss\\u003ds96-c\",\n  \"email\": \"longlh@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "113227587874433147952",
+        "name": "Long Luc",
+        "given_name": "Long",
+        "family_name": "Luc",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocICtq1wLeIK-OFORG-nkycmg_x9RhoASl8oGasraW0A7rpLrss=s96-c",
+        "email": "longlh@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
   },
-  {
-    "email": "dangvh@2-b.io",
-    "defaultWorkType": "development"
+  "updatedAt": {
+    "$date": "2024-07-24T12:07:30.553Z"
   }
-]
+},
+{
+  "_id": {
+    "$oid": "669e7267f18b4a1b9d51ab13"
+  },
+  "email": "phuongntb@2-b.io",
+  "defaultWorkType": "sales",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "102244463440819952589",
+      "id": "102244463440819952589",
+      "displayName": "Phuong Nguyen",
+      "name": {
+        "givenName": "Phuong",
+        "familyName": "Nguyen"
+      },
+      "given_name": "Phuong",
+      "family_name": "Nguyen",
+      "email_verified": true,
+      "verified": true,
+      "email": "phuongntb@2-b.io",
+      "emails": [
+        {
+          "value": "phuongntb@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocKOFnNvGvT4d_RjGzLgToSl6nCtWezyddFVpS2koV8Hho9bJ_Ut=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocKOFnNvGvT4d_RjGzLgToSl6nCtWezyddFVpS2koV8Hho9bJ_Ut=s96-c",
+      "_raw": "{\n  \"sub\": \"102244463440819952589\",\n  \"name\": \"Phuong Nguyen\",\n  \"given_name\": \"Phuong\",\n  \"family_name\": \"Nguyen\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocKOFnNvGvT4d_RjGzLgToSl6nCtWezyddFVpS2koV8Hho9bJ_Ut\\u003ds96-c\",\n  \"email\": \"phuongntb@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "102244463440819952589",
+        "name": "Phuong Nguyen",
+        "given_name": "Phuong",
+        "family_name": "Nguyen",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocKOFnNvGvT4d_RjGzLgToSl6nCtWezyddFVpS2koV8Hho9bJ_Ut=s96-c",
+        "email": "phuongntb@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-23T04:34:19.192Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "669e7267f18b4a1b9d51ab14"
+  },
+  "email": "dangvh@2-b.io",
+  "defaultWorkType": "development",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "109264574087488787315",
+      "id": "109264574087488787315",
+      "displayName": "Dang Vu",
+      "name": {
+        "givenName": "Dang",
+        "familyName": "Vu"
+      },
+      "given_name": "Dang",
+      "family_name": "Vu",
+      "email_verified": true,
+      "verified": true,
+      "email": "dangvh@2-b.io",
+      "emails": [
+        {
+          "value": "dangvh@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocLzI2SCCAwEmp3Uc2JigcxvXDxc4t82HR3KdGRCkNcqtAuDJg=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocLzI2SCCAwEmp3Uc2JigcxvXDxc4t82HR3KdGRCkNcqtAuDJg=s96-c",
+      "_raw": "{\n  \"sub\": \"109264574087488787315\",\n  \"name\": \"Dang Vu\",\n  \"given_name\": \"Dang\",\n  \"family_name\": \"Vu\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocLzI2SCCAwEmp3Uc2JigcxvXDxc4t82HR3KdGRCkNcqtAuDJg\\u003ds96-c\",\n  \"email\": \"dangvh@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "109264574087488787315",
+        "name": "Dang Vu",
+        "given_name": "Dang",
+        "family_name": "Vu",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocLzI2SCCAwEmp3Uc2JigcxvXDxc4t82HR3KdGRCkNcqtAuDJg=s96-c",
+        "email": "dangvh@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-22T16:29:34.355Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "669f234e985fa6f4760936af"
+  },
+  "email": "thaohp@2-b.io",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-07-23T03:28:14.291Z"
+  },
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "103485172502324865064",
+      "id": "103485172502324865064",
+      "displayName": "Thao Ha",
+      "name": {
+        "givenName": "Thao",
+        "familyName": "Ha"
+      },
+      "given_name": "Thao",
+      "family_name": "Ha",
+      "email_verified": true,
+      "verified": true,
+      "email": "thaohp@2-b.io",
+      "emails": [
+        {
+          "value": "thaohp@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a-/ALV-UjWy1gtn6DxK4paTZ3HwENkItJnLLP1O4HaexmiBUARnlJTYEe75pxeQzRq9JlnsQmCHu2tXvCo1L56g53KJY0d2h-iWxQXPy1AvokNvuSeMnYpLWxrJLeYxfOGx_idjZnPDBsSxUpOF2SHUpEfsKMxgj3boXJvyv71F3kLFYGKvepUzTBTYKC7CPa3i7Xg4yL_JWN29CiY4PE3HmqSfGOYbORMK4vWmc2Ypqq3MC-TMQjrdVq_JtaQNDc7_2OuMliRrq52Cti4yfkTZnvC-Ig7qwNwfrX49aOF-i0sUQ3ekBDKGFnaP34yyrwnZmb23IM-Zanpp__7izxa-GadG_PgODmt-uEwxAUCIRSnIEEhx6KTBJ9LMfc4J-Th6DWckXL3ncVkZOlJpPHwsLDmWheZGkqNnH6wgTH08HEXNVtvtuLeh7toFRjpncdctOJALGLfQhj5WB_TR-gdiNCeTCSxS1KX1fJeotl0t3JEJzyjKEC9NwvftM5jEtIUbjTtSbAJ8p6hC09n_oWryiw2yp01VfrPDN5CcPsLOegFYVyo1GsW0KxomXo5vdViNK88UfyKkfCRRXl70xm81gBZ8Q8wEUWxuO-Vgdokq6Ahl7pGiHHZVrEYUbc2FRY0zEhe4wZikXU9vcP6K1vP8infx2aRoU2m1Kabb0rt3vpizEEhKUJBXL2TOiYEJlN_ddDUaz8O_7jziIhfI2CBkgJomiBF_BsfIbX61S5Bf07WsPrAI2tCo3J7JqWmE31y9Q1vqY7ywL2OyTpT6YrexeyAFB_8rk-9B4OBEYdV0vje2rAIkfjFQQ1iC0lGsYKX-eOUrDimKncb6gyZqeXw3uu3hKB6wSVOVIfv-HLkiO9JWkShQRCEJoAKjlR5tqBwxgtw6o5NOsinfE22Ce0HlFWYJO99zo3hEd4FTR4EgWyYDz3jkx4icgWd9lBC9lGDN5R5WEYC2eZ9MB1nNwRgkR_j9yOfSz7Y9=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a-/ALV-UjWy1gtn6DxK4paTZ3HwENkItJnLLP1O4HaexmiBUARnlJTYEe75pxeQzRq9JlnsQmCHu2tXvCo1L56g53KJY0d2h-iWxQXPy1AvokNvuSeMnYpLWxrJLeYxfOGx_idjZnPDBsSxUpOF2SHUpEfsKMxgj3boXJvyv71F3kLFYGKvepUzTBTYKC7CPa3i7Xg4yL_JWN29CiY4PE3HmqSfGOYbORMK4vWmc2Ypqq3MC-TMQjrdVq_JtaQNDc7_2OuMliRrq52Cti4yfkTZnvC-Ig7qwNwfrX49aOF-i0sUQ3ekBDKGFnaP34yyrwnZmb23IM-Zanpp__7izxa-GadG_PgODmt-uEwxAUCIRSnIEEhx6KTBJ9LMfc4J-Th6DWckXL3ncVkZOlJpPHwsLDmWheZGkqNnH6wgTH08HEXNVtvtuLeh7toFRjpncdctOJALGLfQhj5WB_TR-gdiNCeTCSxS1KX1fJeotl0t3JEJzyjKEC9NwvftM5jEtIUbjTtSbAJ8p6hC09n_oWryiw2yp01VfrPDN5CcPsLOegFYVyo1GsW0KxomXo5vdViNK88UfyKkfCRRXl70xm81gBZ8Q8wEUWxuO-Vgdokq6Ahl7pGiHHZVrEYUbc2FRY0zEhe4wZikXU9vcP6K1vP8infx2aRoU2m1Kabb0rt3vpizEEhKUJBXL2TOiYEJlN_ddDUaz8O_7jziIhfI2CBkgJomiBF_BsfIbX61S5Bf07WsPrAI2tCo3J7JqWmE31y9Q1vqY7ywL2OyTpT6YrexeyAFB_8rk-9B4OBEYdV0vje2rAIkfjFQQ1iC0lGsYKX-eOUrDimKncb6gyZqeXw3uu3hKB6wSVOVIfv-HLkiO9JWkShQRCEJoAKjlR5tqBwxgtw6o5NOsinfE22Ce0HlFWYJO99zo3hEd4FTR4EgWyYDz3jkx4icgWd9lBC9lGDN5R5WEYC2eZ9MB1nNwRgkR_j9yOfSz7Y9=s96-c",
+      "_raw": "{\n  \"sub\": \"103485172502324865064\",\n  \"name\": \"Thao Ha\",\n  \"given_name\": \"Thao\",\n  \"family_name\": \"Ha\",\n  \"picture\": \"https://lh3.googleusercontent.com/a-/ALV-UjWy1gtn6DxK4paTZ3HwENkItJnLLP1O4HaexmiBUARnlJTYEe75pxeQzRq9JlnsQmCHu2tXvCo1L56g53KJY0d2h-iWxQXPy1AvokNvuSeMnYpLWxrJLeYxfOGx_idjZnPDBsSxUpOF2SHUpEfsKMxgj3boXJvyv71F3kLFYGKvepUzTBTYKC7CPa3i7Xg4yL_JWN29CiY4PE3HmqSfGOYbORMK4vWmc2Ypqq3MC-TMQjrdVq_JtaQNDc7_2OuMliRrq52Cti4yfkTZnvC-Ig7qwNwfrX49aOF-i0sUQ3ekBDKGFnaP34yyrwnZmb23IM-Zanpp__7izxa-GadG_PgODmt-uEwxAUCIRSnIEEhx6KTBJ9LMfc4J-Th6DWckXL3ncVkZOlJpPHwsLDmWheZGkqNnH6wgTH08HEXNVtvtuLeh7toFRjpncdctOJALGLfQhj5WB_TR-gdiNCeTCSxS1KX1fJeotl0t3JEJzyjKEC9NwvftM5jEtIUbjTtSbAJ8p6hC09n_oWryiw2yp01VfrPDN5CcPsLOegFYVyo1GsW0KxomXo5vdViNK88UfyKkfCRRXl70xm81gBZ8Q8wEUWxuO-Vgdokq6Ahl7pGiHHZVrEYUbc2FRY0zEhe4wZikXU9vcP6K1vP8infx2aRoU2m1Kabb0rt3vpizEEhKUJBXL2TOiYEJlN_ddDUaz8O_7jziIhfI2CBkgJomiBF_BsfIbX61S5Bf07WsPrAI2tCo3J7JqWmE31y9Q1vqY7ywL2OyTpT6YrexeyAFB_8rk-9B4OBEYdV0vje2rAIkfjFQQ1iC0lGsYKX-eOUrDimKncb6gyZqeXw3uu3hKB6wSVOVIfv-HLkiO9JWkShQRCEJoAKjlR5tqBwxgtw6o5NOsinfE22Ce0HlFWYJO99zo3hEd4FTR4EgWyYDz3jkx4icgWd9lBC9lGDN5R5WEYC2eZ9MB1nNwRgkR_j9yOfSz7Y9\\u003ds96-c\",\n  \"email\": \"thaohp@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "103485172502324865064",
+        "name": "Thao Ha",
+        "given_name": "Thao",
+        "family_name": "Ha",
+        "picture": "https://lh3.googleusercontent.com/a-/ALV-UjWy1gtn6DxK4paTZ3HwENkItJnLLP1O4HaexmiBUARnlJTYEe75pxeQzRq9JlnsQmCHu2tXvCo1L56g53KJY0d2h-iWxQXPy1AvokNvuSeMnYpLWxrJLeYxfOGx_idjZnPDBsSxUpOF2SHUpEfsKMxgj3boXJvyv71F3kLFYGKvepUzTBTYKC7CPa3i7Xg4yL_JWN29CiY4PE3HmqSfGOYbORMK4vWmc2Ypqq3MC-TMQjrdVq_JtaQNDc7_2OuMliRrq52Cti4yfkTZnvC-Ig7qwNwfrX49aOF-i0sUQ3ekBDKGFnaP34yyrwnZmb23IM-Zanpp__7izxa-GadG_PgODmt-uEwxAUCIRSnIEEhx6KTBJ9LMfc4J-Th6DWckXL3ncVkZOlJpPHwsLDmWheZGkqNnH6wgTH08HEXNVtvtuLeh7toFRjpncdctOJALGLfQhj5WB_TR-gdiNCeTCSxS1KX1fJeotl0t3JEJzyjKEC9NwvftM5jEtIUbjTtSbAJ8p6hC09n_oWryiw2yp01VfrPDN5CcPsLOegFYVyo1GsW0KxomXo5vdViNK88UfyKkfCRRXl70xm81gBZ8Q8wEUWxuO-Vgdokq6Ahl7pGiHHZVrEYUbc2FRY0zEhe4wZikXU9vcP6K1vP8infx2aRoU2m1Kabb0rt3vpizEEhKUJBXL2TOiYEJlN_ddDUaz8O_7jziIhfI2CBkgJomiBF_BsfIbX61S5Bf07WsPrAI2tCo3J7JqWmE31y9Q1vqY7ywL2OyTpT6YrexeyAFB_8rk-9B4OBEYdV0vje2rAIkfjFQQ1iC0lGsYKX-eOUrDimKncb6gyZqeXw3uu3hKB6wSVOVIfv-HLkiO9JWkShQRCEJoAKjlR5tqBwxgtw6o5NOsinfE22Ce0HlFWYJO99zo3hEd4FTR4EgWyYDz3jkx4icgWd9lBC9lGDN5R5WEYC2eZ9MB1nNwRgkR_j9yOfSz7Y9=s96-c",
+        "email": "thaohp@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-24T02:29:41.353Z"
+  },
+  "defaultWorkType": "sales"
+},
+{
+  "_id": {
+    "$oid": "669f5487985fa6f4769f237d"
+  },
+  "email": "longdv@2-b.io",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-07-23T06:58:15.560Z"
+  },
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "100472369338219491593",
+      "id": "100472369338219491593",
+      "displayName": "Long Dang",
+      "name": {
+        "givenName": "Long",
+        "familyName": "Dang"
+      },
+      "given_name": "Long",
+      "family_name": "Dang",
+      "email_verified": true,
+      "verified": true,
+      "email": "longdv@2-b.io",
+      "emails": [
+        {
+          "value": "longdv@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocLFhEo904zhQht4zC9I24h_arv8RTOkKlDOfJOdB8Ogq5MWJe8=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocLFhEo904zhQht4zC9I24h_arv8RTOkKlDOfJOdB8Ogq5MWJe8=s96-c",
+      "_raw": "{\n  \"sub\": \"100472369338219491593\",\n  \"name\": \"Long Dang\",\n  \"given_name\": \"Long\",\n  \"family_name\": \"Dang\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocLFhEo904zhQht4zC9I24h_arv8RTOkKlDOfJOdB8Ogq5MWJe8\\u003ds96-c\",\n  \"email\": \"longdv@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "100472369338219491593",
+        "name": "Long Dang",
+        "given_name": "Long",
+        "family_name": "Dang",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocLFhEo904zhQht4zC9I24h_arv8RTOkKlDOfJOdB8Ogq5MWJe8=s96-c",
+        "email": "longdv@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-23T06:58:15.560Z"
+  },
+  "defaultWorkType": "development"
+},
+{
+  "_id": {
+    "$oid": "669f579aa743f2b7cb51f9d9"
+  },
+  "email": "chiennv@2-b.io",
+  "defaultWorkType": "presales",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "101526832854352528498",
+      "id": "101526832854352528498",
+      "displayName": "Chien Nguyen",
+      "name": {
+        "givenName": "Chien",
+        "familyName": "Nguyen"
+      },
+      "given_name": "Chien",
+      "family_name": "Nguyen",
+      "email_verified": true,
+      "verified": true,
+      "email": "chiennv@2-b.io",
+      "emails": [
+        {
+          "value": "chiennv@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocL8p7pQdSXIIY1JHCTFY1cfmpLF7IfIm-lbzOUy58a-EKl8nA=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocL8p7pQdSXIIY1JHCTFY1cfmpLF7IfIm-lbzOUy58a-EKl8nA=s96-c",
+      "_raw": "{\n  \"sub\": \"101526832854352528498\",\n  \"name\": \"Chien Nguyen\",\n  \"given_name\": \"Chien\",\n  \"family_name\": \"Nguyen\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocL8p7pQdSXIIY1JHCTFY1cfmpLF7IfIm-lbzOUy58a-EKl8nA\\u003ds96-c\",\n  \"email\": \"chiennv@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "101526832854352528498",
+        "name": "Chien Nguyen",
+        "given_name": "Chien",
+        "family_name": "Nguyen",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocL8p7pQdSXIIY1JHCTFY1cfmpLF7IfIm-lbzOUy58a-EKl8nA=s96-c",
+        "email": "chiennv@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-23T08:28:43.843Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "669f579aa743f2b7cb51f9da"
+  },
+  "email": "chinhnv@2-b.io",
+  "defaultWorkType": "development"
+},
+{
+  "_id": {
+    "$oid": "669f579aa743f2b7cb51f9db"
+  },
+  "email": "dungnh@2-b.io",
+  "defaultWorkType": "development",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "100696583451270988964",
+      "id": "100696583451270988964",
+      "displayName": "Dung Nguyen",
+      "name": {
+        "givenName": "Dung",
+        "familyName": "Nguyen"
+      },
+      "given_name": "Dung",
+      "family_name": "Nguyen",
+      "email_verified": true,
+      "verified": true,
+      "email": "dungnh@2-b.io",
+      "emails": [
+        {
+          "value": "dungnh@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocKCzKDmEbQbKrteQASh9lWxizCyi9EMsIVjBdxo2DzuW2I1t2Df=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocKCzKDmEbQbKrteQASh9lWxizCyi9EMsIVjBdxo2DzuW2I1t2Df=s96-c",
+      "_raw": "{\n  \"sub\": \"100696583451270988964\",\n  \"name\": \"Dung Nguyen\",\n  \"given_name\": \"Dung\",\n  \"family_name\": \"Nguyen\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocKCzKDmEbQbKrteQASh9lWxizCyi9EMsIVjBdxo2DzuW2I1t2Df\\u003ds96-c\",\n  \"email\": \"dungnh@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "100696583451270988964",
+        "name": "Dung Nguyen",
+        "given_name": "Dung",
+        "family_name": "Nguyen",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocKCzKDmEbQbKrteQASh9lWxizCyi9EMsIVjBdxo2DzuW2I1t2Df=s96-c",
+        "email": "dungnh@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-24T02:35:22.028Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "669f579aa743f2b7cb51f9dc"
+  },
+  "email": "duytq@2-b.io",
+  "defaultWorkType": "development",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "111699893803812187592",
+      "id": "111699893803812187592",
+      "displayName": "Duy Tran",
+      "name": {
+        "givenName": "Duy",
+        "familyName": "Tran"
+      },
+      "given_name": "Duy",
+      "family_name": "Tran",
+      "email_verified": true,
+      "verified": true,
+      "email": "duytq@2-b.io",
+      "emails": [
+        {
+          "value": "duytq@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocLgPNr4xWSxaT9N3CVjgWRLbo-iHK8VnLmf14zq24w28cFV-Q=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocLgPNr4xWSxaT9N3CVjgWRLbo-iHK8VnLmf14zq24w28cFV-Q=s96-c",
+      "_raw": "{\n  \"sub\": \"111699893803812187592\",\n  \"name\": \"Duy Tran\",\n  \"given_name\": \"Duy\",\n  \"family_name\": \"Tran\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocLgPNr4xWSxaT9N3CVjgWRLbo-iHK8VnLmf14zq24w28cFV-Q\\u003ds96-c\",\n  \"email\": \"duytq@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "111699893803812187592",
+        "name": "Duy Tran",
+        "given_name": "Duy",
+        "family_name": "Tran",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocLgPNr4xWSxaT9N3CVjgWRLbo-iHK8VnLmf14zq24w28cFV-Q=s96-c",
+        "email": "duytq@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-24T02:29:04.392Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "669f579aa743f2b7cb51f9dd"
+  },
+  "email": "hieutt1@2-b.io",
+  "defaultWorkType": "development",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "106845020937502869189",
+      "id": "106845020937502869189",
+      "displayName": "Hieu Trinh",
+      "name": {
+        "givenName": "Hieu",
+        "familyName": "Trinh"
+      },
+      "given_name": "Hieu",
+      "family_name": "Trinh",
+      "email_verified": true,
+      "verified": true,
+      "email": "hieutt1@2-b.io",
+      "emails": [
+        {
+          "value": "hieutt1@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocJiPZ9G0pYPX8TSNYc4VBx0dzP4afD61MgCSOxEE7it9UWW2g=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocJiPZ9G0pYPX8TSNYc4VBx0dzP4afD61MgCSOxEE7it9UWW2g=s96-c",
+      "_raw": "{\n  \"sub\": \"106845020937502869189\",\n  \"name\": \"Hieu Trinh\",\n  \"given_name\": \"Hieu\",\n  \"family_name\": \"Trinh\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocJiPZ9G0pYPX8TSNYc4VBx0dzP4afD61MgCSOxEE7it9UWW2g\\u003ds96-c\",\n  \"email\": \"hieutt1@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "106845020937502869189",
+        "name": "Hieu Trinh",
+        "given_name": "Hieu",
+        "family_name": "Trinh",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocJiPZ9G0pYPX8TSNYc4VBx0dzP4afD61MgCSOxEE7it9UWW2g=s96-c",
+        "email": "hieutt1@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-24T02:40:34.671Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "669f579aa743f2b7cb51f9de"
+  },
+  "email": "hongnt@2-b.io",
+  "defaultWorkType": "sales"
+},
+{
+  "_id": {
+    "$oid": "669f579aa743f2b7cb51f9df"
+  },
+  "email": "huylc@2-b.io",
+  "defaultWorkType": "development",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "108933146190518574197",
+      "id": "108933146190518574197",
+      "displayName": "Huy Le",
+      "name": {
+        "givenName": "Huy",
+        "familyName": "Le"
+      },
+      "given_name": "Huy",
+      "family_name": "Le",
+      "email_verified": true,
+      "verified": true,
+      "email": "huylc@2-b.io",
+      "emails": [
+        {
+          "value": "huylc@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocI-uhUVzwuNfB9VVgrcIn2ExHHHbCnVEYH_tEsdCJEIBKZTVVE8=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocI-uhUVzwuNfB9VVgrcIn2ExHHHbCnVEYH_tEsdCJEIBKZTVVE8=s96-c",
+      "_raw": "{\n  \"sub\": \"108933146190518574197\",\n  \"name\": \"Huy Le\",\n  \"given_name\": \"Huy\",\n  \"family_name\": \"Le\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocI-uhUVzwuNfB9VVgrcIn2ExHHHbCnVEYH_tEsdCJEIBKZTVVE8\\u003ds96-c\",\n  \"email\": \"huylc@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "108933146190518574197",
+        "name": "Huy Le",
+        "given_name": "Huy",
+        "family_name": "Le",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocI-uhUVzwuNfB9VVgrcIn2ExHHHbCnVEYH_tEsdCJEIBKZTVVE8=s96-c",
+        "email": "huylc@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-23T08:01:55.934Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "669f579aa743f2b7cb51f9e0"
+  },
+  "email": "trangnt@2-b.io",
+  "defaultWorkType": "development",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "117233679902088479699",
+      "id": "117233679902088479699",
+      "displayName": "Trang Nguyen",
+      "name": {
+        "givenName": "Trang",
+        "familyName": "Nguyen"
+      },
+      "given_name": "Trang",
+      "family_name": "Nguyen",
+      "email_verified": true,
+      "verified": true,
+      "email": "trangnt@2-b.io",
+      "emails": [
+        {
+          "value": "trangnt@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocKktMw0WXmpYjQZt-JbWaysXiCKCskNPaLSPV7Gf4wl1NLX_Gc=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocKktMw0WXmpYjQZt-JbWaysXiCKCskNPaLSPV7Gf4wl1NLX_Gc=s96-c",
+      "_raw": "{\n  \"sub\": \"117233679902088479699\",\n  \"name\": \"Trang Nguyen\",\n  \"given_name\": \"Trang\",\n  \"family_name\": \"Nguyen\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocKktMw0WXmpYjQZt-JbWaysXiCKCskNPaLSPV7Gf4wl1NLX_Gc\\u003ds96-c\",\n  \"email\": \"trangnt@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "117233679902088479699",
+        "name": "Trang Nguyen",
+        "given_name": "Trang",
+        "family_name": "Nguyen",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocKktMw0WXmpYjQZt-JbWaysXiCKCskNPaLSPV7Gf4wl1NLX_Gc=s96-c",
+        "email": "trangnt@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-24T02:31:05.991Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "669f579aa743f2b7cb51f9e1"
+  },
+  "email": "tungnt@2-b.io",
+  "defaultWorkType": "development",
+  "profiles": {
+    "google": {
+      "provider": "google",
+      "sub": "113160797457161135349",
+      "id": "113160797457161135349",
+      "displayName": "Tung Nguyen",
+      "name": {
+        "givenName": "Tung",
+        "familyName": "Nguyen"
+      },
+      "given_name": "Tung",
+      "family_name": "Nguyen",
+      "email_verified": true,
+      "verified": true,
+      "email": "tungnt@2-b.io",
+      "emails": [
+        {
+          "value": "tungnt@2-b.io",
+          "type": "account"
+        }
+      ],
+      "photos": [
+        {
+          "value": "https://lh3.googleusercontent.com/a/ACg8ocKRXkBzR0bAscKqsd1wi9Up1JZeNK8YjOWNOVRoQtEGsWNsyQ=s96-c",
+          "type": "default"
+        }
+      ],
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocKRXkBzR0bAscKqsd1wi9Up1JZeNK8YjOWNOVRoQtEGsWNsyQ=s96-c",
+      "_raw": "{\n  \"sub\": \"113160797457161135349\",\n  \"name\": \"Tung Nguyen\",\n  \"given_name\": \"Tung\",\n  \"family_name\": \"Nguyen\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocKRXkBzR0bAscKqsd1wi9Up1JZeNK8YjOWNOVRoQtEGsWNsyQ\\u003ds96-c\",\n  \"email\": \"tungnt@2-b.io\",\n  \"email_verified\": true,\n  \"hd\": \"2-b.io\"\n}",
+      "_json": {
+        "sub": "113160797457161135349",
+        "name": "Tung Nguyen",
+        "given_name": "Tung",
+        "family_name": "Nguyen",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocKRXkBzR0bAscKqsd1wi9Up1JZeNK8YjOWNOVRoQtEGsWNsyQ=s96-c",
+        "email": "tungnt@2-b.io",
+        "email_verified": true,
+        "hd": "2-b.io",
+        "domain": "2-b.io"
+      }
+    }
+  },
+  "updatedAt": {
+    "$date": "2024-07-23T07:23:25.133Z"
+  }
+}]

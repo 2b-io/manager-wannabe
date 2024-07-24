@@ -1,3 +1,4 @@
+import prettyMilliseconds from 'pretty-ms'
 import React from 'react'
 import {FiMeh} from 'react-icons/fi'
 import styled from 'styled-components'
@@ -5,16 +6,8 @@ import styled from 'styled-components'
 import Badge from 'components/badge'
 import Card from 'components/card'
 import Grid from 'components/grid'
+import List from 'components/list'
 import Text from 'components/text'
-
-const List = styled.ul`
-  display: flex;
-  grid-gap: 1rem;
-`
-
-List.Item = styled.li`
-  display: flex;
-`
 
 const Circle = styled.div`
   border-radius: 1.5rem;
@@ -34,8 +27,12 @@ const Avatar = ({data: user}) => {
     <FiMeh size={24} />
   )
 
-  return <Circle>{avatar}</Circle>
+  return <Circle title={user.profiles?.google?.displayName}>{avatar}</Circle>
 }
+
+const formatDuration = (s) => prettyMilliseconds(s * 1e3, {
+  compact: true
+})
 
 const Project = ({
   actions,
@@ -61,11 +58,18 @@ const Project = ({
             </List.Item>
           </List>
           <List>
-            {project.sales.map((user) => (
+            {project.participants.map((user) => (
               <List.Item key={user.email}>
                 <Avatar data={user} />
               </List.Item>
             ))}
+            {project.totalSpentAsSeconds && (
+              <List.Item last>
+                <Text>
+                  Spent {formatDuration(project.totalSpentAsSeconds)} 
+                </Text>
+              </List.Item>
+            ) || null}
           </List>
         </Grid>
       </Card.Content>
