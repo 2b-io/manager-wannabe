@@ -306,4 +306,100 @@
     "$date": "2024-07-24T03:44:58.314Z"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a10eea0257982bb1e712ef"
+  },
+  "email": "longdv@2-b.io",
+  "projectId": {
+    "$oid": "669f208dd7edd3918f2cce78"
+  },
+  "date": {
+    "$date": "2024-07-24T14:25:14.872Z"
+  },
+  "spent": "1d",
+  "spentAsSeconds": 28800,
+  "workType": "development",
+  "workDescription": "",
+  "forceUnlocked": false,
+  "createdAt": {
+    "$date": "2024-07-24T14:25:46.480Z"
+  },
+  "updatedAt": {
+    "$date": "2024-07-24T14:25:46.480Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a111840257982bb1e71300"
+  },
+  "email": "phuongntb@2-b.io",
+  "projectId": {
+    "$oid": "669f208dd7edd3918f2cce73"
+  },
+  "date": {
+    "$date": "2024-07-24T14:36:04.759Z"
+  },
+  "spent": "1h",
+  "spentAsSeconds": 3600,
+  "workType": "sales",
+  "workDescription": "check design Mobile và support QA",
+  "forceUnlocked": false,
+  "createdAt": {
+    "$date": "2024-07-24T14:36:52.142Z"
+  },
+  "updatedAt": {
+    "$date": "2024-07-24T14:36:52.142Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a111a50257982bb1e71303"
+  },
+  "email": "phuongntb@2-b.io",
+  "projectId": {
+    "$oid": "669f208dd7edd3918f2cce77"
+  },
+  "date": {
+    "$date": "2024-07-24T14:36:54.835Z"
+  },
+  "spent": "4h",
+  "spentAsSeconds": 14400,
+  "workType": "sales",
+  "workDescription": "chuẩn bị demo, demo và follow up sau demo",
+  "forceUnlocked": false,
+  "createdAt": {
+    "$date": "2024-07-24T14:37:25.247Z"
+  },
+  "updatedAt": {
+    "$date": "2024-07-24T14:37:25.247Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a111f20257982bb1e71306"
+  },
+  "email": "phuongntb@2-b.io",
+  "projectId": {
+    "$oid": "669f208dd7edd3918f2cce78"
+  },
+  "date": {
+    "$date": "2024-07-24T14:37:46.647Z"
+  },
+  "spent": "1h 30m",
+  "spentAsSeconds": 5400,
+  "workType": "sales",
+  "workDescription": "check yêu cầu của KH, support dev tạo file để KH nhập thông tin",
+  "forceUnlocked": false,
+  "createdAt": {
+    "$date": "2024-07-24T14:38:42.760Z"
+  },
+  "updatedAt": {
+    "$date": "2024-07-24T14:38:42.760Z"
+  },
+  "__v": 0
 }]

@@ -46,6 +46,9 @@ const Layout = () => {
             <Button as={Link} to="/timesheet">Timesheet</Button>
           </Menu.Item>
           <Menu.Item>
+            <Button as={Link} to="/projects">Projects</Button>
+          </Menu.Item>
+          <Menu.Item>
             <Button as="a" href="/auth/logout">Logout</Button>
           </Menu.Item>
         </Menu>

@@ -6,7 +6,10 @@ import {
   takeEvery
 } from 'redux-saga/effects'
 
-import {fetchProjects} from 'services/api'
+import {
+  fetchProjects,
+  toggleStar
+} from 'services/api'
 
 import actionCreatorFactory from './action-creator-factory'
 
@@ -26,6 +29,13 @@ const slide = createSlice({
       (action.payload.projects || []).forEach((project) => {
         state.projects[project._id] = project
       })
+    },
+    updateStar: (state, action) => {
+      const {projectId, starred} = action.payload
+
+      if (state.projects[projectId]) {
+        state.projects[projectId].starred = starred
+      }
     }
   }
 })
@@ -34,7 +44,8 @@ export const reducer = slide.reducer
 export const actions = {
   ...slide.actions,
   // other actions that don't change state
-  fetch: actionCreatorFactory(slide.name)('fetch')
+  fetch: actionCreatorFactory(slide.name)('fetch'),
+  toggleStar: actionCreatorFactory(slide.name)('toggleStar')
 }
 
 // saga
@@ -47,6 +58,12 @@ export const saga = function* () {
         projects,
         clearBeforeAdd: true
       }))
+    }),
+    takeEvery(actions.toggleStar.type, function* (action) {
+      const projectId = action.payload
+      const starState = yield call(toggleStar, projectId)
+
+      yield put(actions.updateStar(starState))
     })
   ])
 }

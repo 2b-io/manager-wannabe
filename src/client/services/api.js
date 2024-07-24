@@ -6,6 +6,20 @@ export const fetchProjects = async () => {
   return projects
 }
 
+export const toggleStar = async (projectId) => {
+  const res = await fetch(`/api/projects/${projectId}/toggle-star`, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+
+  const starState = await res.json()
+
+  return starState
+}
+
 export const createTimelog = async (data) => {
   const res = await fetch('/api/timelogs', {
     method: 'post',

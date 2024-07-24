@@ -50,6 +50,7 @@ Table.Cell = styled(
   padding: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-bottom: 2px solid whitesmoke;
 
   ${({minimal}) => minimal && `
     white-space: nowrap;

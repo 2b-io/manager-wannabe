@@ -35,7 +35,7 @@ const formatDuration = (s) => prettyMilliseconds(s * 1e3, {
 })
 
 const Project = ({
-  actions,
+  actions = [],
   data: project
 }) => {
   return (
@@ -44,7 +44,10 @@ const Project = ({
         <Text.SectionTitle as="a" href={project.link} target="_blank">{project.name}</Text.SectionTitle>
         {actions.map((action, index) => {
           return (
-            <Card.HeaderAction key={index} onClick={action.onClick}>
+            <Card.HeaderAction
+              key={index}
+              onClick={action.onClick}
+              title={action.title}>
               {action.icon}
             </Card.HeaderAction>
           )

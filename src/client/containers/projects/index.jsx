@@ -9,14 +9,8 @@ import {
   FiClock,
   FiStar
 } from 'react-icons/fi'
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux'
-import {
-  Link as RouterLink,
-  useOutletContext
-} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
+import {useOutletContext} from 'react-router-dom'
 
 import Button from 'components/button'
 import Card from 'components/card'
@@ -60,36 +54,10 @@ const Dashboard = () => {
     <Grid fullWidth space="loose">
       <Card loose>
         <Card.Header>
-          <Text.PageTitle>Timelog Summary</Text.PageTitle>
-          <Card.HeaderAction onClick={null}>
-            <FiChevronLeft />
-          </Card.HeaderAction>
-          <Card.HeaderAction onClick={null}>
-            <FiCalendar />
-          </Card.HeaderAction>
-          <Card.HeaderAction onClick={null}>
-            <FiChevronRight />
-          </Card.HeaderAction>
+          <Text.PageTitle>All Projects</Text.PageTitle>
         </Card.Header>
         <Card.Content>
-          <EmptyState>
-            <Text>Weekly Calendar Here</Text>
-          </EmptyState>
-        </Card.Content>
-      </Card>
-      <Card loose>
-        <Card.Header>
-          <Text.PageTitle>Starred Projects</Text.PageTitle>
-        </Card.Header>
-        <Card.Content>
-          <ProjectList projects={starredProjects}
-            onEmpty={() => (
-              <EmptyState>
-                <RouterLink to="/projects">
-                  <Text>You didn't star any projects yet. Star some!</Text>
-                </RouterLink>
-              </EmptyState>
-            )}
+          <ProjectList projects={allProjects}
             onProjectRender={(project) => {
               return (
                 <Project

@@ -30,6 +30,7 @@ const HeaderAction = styled.button`
   padding: 0;
   outline: none;
   border: none;
+  border-radius: 1rem;
   background: transparent;
   flex-shrink: 0;
   display: flex;
@@ -38,6 +39,14 @@ const HeaderAction = styled.button`
   width: 4rem;
   height: 4rem;
   cursor: pointer;
+
+  &:hover {
+    background: #c7f;
+
+    svg {
+      filter: invert(100%);
+    }
+  }
 `
 
 const Content = styled.div`

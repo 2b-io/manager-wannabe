@@ -52,6 +52,27 @@ const main = async () => {
         as: 'timelogs'
       }
     }, {
+      $lookup: {
+        from: 'projectStars',
+        localField: '_id',
+        foreignField: 'projectId',
+        as: 'stars',
+        pipeline: [
+          {
+            $match: {
+              userId: req.user._id
+            }
+          }
+        ]
+      }
+    }, {
+      $addFields: {
+        starred: {
+          $first: '$stars.starred'
+        }
+      }
+    },
+    {
       $group: {
         _id: '$_id',
         totalSpentAsSeconds: {
@@ -70,6 +91,9 @@ const main = async () => {
         },
         link: {
           $first: '$link'
+        },
+        starred: {
+          $first: '$starred'
         }
       }
     }, {
@@ -88,6 +112,38 @@ const main = async () => {
     }])
 
     res.json(projects)
+  })
+
+  app.post('/api/projects/:id/toggle-star', async (req, res, next) => {
+    const db = req.app.get('db')
+    const {ProjectStar} = db.models
+
+    // ensure document exists
+    const currentState = await ProjectStar.findOne({
+      userId: req.user._id,
+      projectId: req.params.id,
+    })
+
+    const where = {
+      userId: req.user._id,
+      projectId: req.params.id,
+    }
+
+    if (currentState) {
+      where.starred = currentState.starred
+    } else {
+      where.starred = {$exists: 0}
+    }
+
+    // update
+    const state = await ProjectStar.findOneAndUpdate(where, {
+      starred: currentState ? !currentState.starred : true
+    }, {
+      new: true,
+      upsert: true
+    })
+
+    return res.json(state)
   })
 
   app.get('/api/timelogs', async (req, res, next) => {

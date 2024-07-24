@@ -17,6 +17,7 @@ import GlobalStyle from './global-style'
 import Login from './containers/login'
 import Layout from './containers/layout'
 import Dashboard from './containers/dashboard'
+import Projects from './containers/projects'
 import Timesheet from './containers/timesheet'
 
 import store from './state/store'
@@ -90,6 +91,15 @@ const router = createBrowserRouter([createProtectedRoute({
     loader: () => {
       store.dispatch(project.fetch())
       store.dispatch(timelog.fetch())
+
+      return null
+    }
+  }), createProtectedRoute({
+    index: true,
+    path: 'projects',
+    element: <Projects />,
+    loader: () => {
+      store.dispatch(project.fetch())
 
       return null
     }
