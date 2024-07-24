@@ -60,9 +60,7 @@ const main = async () => {
           }
         },
         emails: {
-          $push: {
-            $first: '$timelogs.email'
-          }
+          $push: '$timelogs.email'
         },
         name: {
           $first: '$name'
@@ -74,6 +72,8 @@ const main = async () => {
           $first: '$link'
         }
       }
+    }, {
+      $unwind: '$emails'
     }, {
       $lookup: {
         from: 'users',
