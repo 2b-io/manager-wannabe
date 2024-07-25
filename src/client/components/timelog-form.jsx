@@ -5,6 +5,8 @@ import React, {
 import Button from 'components/button'
 import Form from 'components/form'
 
+import dayjs from 'services/day'
+
 const TimelogForm = ({
   projects,
   initialData = {},
@@ -68,7 +70,9 @@ const TimelogForm = ({
           <Form.Label>Date</Form.Label>
           <Form.DatePicker
             value={date?.toLocaleDateString('en-CA')}
-            onChange={(e) => setDate(new Date(e.target.value))}
+            onChange={(e) => {
+              setDate(dayjs(e.target.value).toDate())
+            }}
           />
         </Form.Item>
         <Form.Item>
