@@ -81,6 +81,7 @@ const router = createBrowserRouter([createProtectedRoute({
     element: <Dashboard />,
     loader: () => {
       store.dispatch(project.fetch())
+      store.dispatch(timelog.fetch())
 
       return null
     }

@@ -32,7 +32,7 @@ import {
   timelog as timelogAction
 } from 'state/actions'
 
-
+import TimelogSummary from './timelog-summary'
 
 const ProjectList = ({projects, onEmpty, onProjectRender}) => {
   if (!projects || !projects.length) {
@@ -58,25 +58,8 @@ const Dashboard = () => {
 
   return (
     <Grid fullWidth space="loose">
-      <Card loose>
-        <Card.Header>
-          <Text.PageTitle>Timelog Summary</Text.PageTitle>
-          <Card.HeaderAction onClick={null}>
-            <FiChevronLeft />
-          </Card.HeaderAction>
-          <Card.HeaderAction onClick={null}>
-            <FiCalendar />
-          </Card.HeaderAction>
-          <Card.HeaderAction onClick={null}>
-            <FiChevronRight />
-          </Card.HeaderAction>
-        </Card.Header>
-        <Card.Content>
-          <EmptyState>
-            <Text>Weekly Calendar Here</Text>
-          </EmptyState>
-        </Card.Content>
-      </Card>
+      <TimelogSummary />
+      
       <Card loose>
         <Card.Header>
           <Text.PageTitle>Starred Projects</Text.PageTitle>

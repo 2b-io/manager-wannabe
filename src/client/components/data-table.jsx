@@ -19,17 +19,13 @@ const RowAction = styled.button`
   `}
 `
 
-const Wrapper = styled.div`
-  border-radius: 1rem;
-  overflow: hidden;
-  outline: 2px solid whitesmoke;
-`
-
 const Table = styled.table`
   line-height: 3rem;
   border-collapse: collapse;
+  border-style: hidden;
   width: 100%;
   table-layout: fixed;
+
 `
 
 Table.Header = styled.thead`
@@ -50,7 +46,6 @@ Table.Cell = styled(
   padding: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-bottom: 2px solid whitesmoke;
 
   ${({minimal}) => minimal && `
     white-space: nowrap;
@@ -60,23 +55,36 @@ Table.Cell = styled(
   `}
 `
 
+const Wrapper = styled(({border, ...props}) => <div {...props} />)`
+  border-radius: 1rem;
+  overflow: hidden;
+  outline: 2px solid whitesmoke;
+
+  ${({border}) => border && `
+    ${Table.Cell} {
+      border: 1px solid whitesmoke;
+    }
+  `}
+`
+
 const DataTable = ({
+  border,
   columns,
   keyField,
   data,
   rowActions = []
 }) => {
   return (
-    <Wrapper>
+    <Wrapper border={border}>
       <Table>
         <Table.Header>
           <Table.Row>
             {columns.map((col) => (
               <Table.Cell key={col.for}>
-                {col.title}
+                {col.renderHeader ? col.renderHeader(col) : col.title}
               </Table.Cell>
             ))}
-            {rowActions.length && (<Table.Cell minimal />)}
+            {rowActions.length && (<Table.Cell minimal />) || null}
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -85,7 +93,7 @@ const DataTable = ({
               <Table.Row key={row[keyField]}>
                 {columns.map((col) => (
                     <Table.Cell key={col.for}>
-                      {col.transform ? col.transform(row[col.for], row) : row[col.for]}
+                      {col.renderCell ? col.renderCell(row[col.for], row, col) : row[col.for]}
                     </Table.Cell>
                 ))}
                 {rowActions.length && (
@@ -109,7 +117,7 @@ const DataTable = ({
                       )
                     })}
                   </Table.Cell>
-                )}
+                ) || null}
               </Table.Row>
             )
           })}

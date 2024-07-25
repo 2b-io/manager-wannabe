@@ -42,7 +42,7 @@ const Timesheet = () => {
   const columns = [{
     for: 'date',
     title: 'Date',
-    transform: (data, row) => {
+    renderCell: (data, row) => {
       const date = new Date(data)
 
       return dateFormat(date, 'yyyy/mm/dd')
@@ -50,7 +50,7 @@ const Timesheet = () => {
   }, {
     for: 'projectId',
     title: 'Project',
-    transform: (data, row) => {
+    renderCell: (data, row) => {
       return projects[data]?.name
     }
   }, {

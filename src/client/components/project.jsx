@@ -27,7 +27,9 @@ const Avatar = ({data: user}) => {
     <FiMeh size={24} />
   )
 
-  return <Circle title={user.profiles?.google?.displayName}>{avatar}</Circle>
+  return (
+    <Circle title={user.profiles?.google?.displayName}>{avatar}</Circle>
+  )
 }
 
 const formatDuration = (s) => prettyMilliseconds(s * 1e3, {

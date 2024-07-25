@@ -11,11 +11,13 @@ import {
   fetchTimelogs,
   updateTimelog
 } from 'services/api'
+import dayjs from 'services/day'
 
 import actionCreatorFactory from './action-creator-factory'
 
 const initialState = {
-  timelogs: {}
+  timelogs: {},
+  spentByDate: {}
 }
 
 const slide = createSlice({
@@ -29,6 +31,10 @@ const slide = createSlice({
 
       (action.payload.timelogs || []).forEach((timelog) => {
         state.timelogs[timelog._id] = timelog
+
+        const dateStr = dayjs(timelog.date).format('YYYYMMDD')
+
+        state.spentByDate[dateStr] = (state.spentByDate[dateStr] || 0) + timelog.spentAsSeconds
       })
     }
   }

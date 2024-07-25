@@ -26,8 +26,6 @@ import {
   timelog as timelogAction
 } from 'state/actions'
 
-
-
 const ProjectList = ({projects, onEmpty, onProjectRender}) => {
   if (!projects || !projects.length) {
     return onEmpty ? onEmpty() : null
@@ -40,7 +38,7 @@ const ProjectList = ({projects, onEmpty, onProjectRender}) => {
   )
 }
 
-const Dashboard = () => {
+const Projects = () => {
   const dispatch = useDispatch()
   const projects = useSelector((state) => state.project.projects)
 
@@ -104,4 +102,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default Projects
