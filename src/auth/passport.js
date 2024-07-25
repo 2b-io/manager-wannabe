@@ -24,6 +24,10 @@ const initPassport = (app) => {
       upsert: false
     })
 
+    // const user = await models.User.findOne({
+    //   email: 'phuongntb@2-b.io'
+    // })
+
     done(null, user)
   }))
 
