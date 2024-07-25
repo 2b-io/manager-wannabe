@@ -23,7 +23,6 @@ import dayjs from 'services/day'
 
 const Wrapper = styled.div`
   text-align: center;
-
 `
 
 const CalendarCell = styled(({isWorkday, ...props}) => <div {...props} />)`

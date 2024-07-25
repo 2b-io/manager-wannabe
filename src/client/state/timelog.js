@@ -27,6 +27,7 @@ const slide = createSlice({
     add: (state, action) => {
       if (action.payload.clearBeforeAdd) {
         state.timelogs = {}
+        state.spentByDate = {}
       }
 
       (action.payload.timelogs || []).forEach((timelog) => {
