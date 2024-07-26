@@ -60,7 +60,7 @@ const syncSalesJobs = async () => {
       // sync db
       await Promise.all([
         issues.map(async (issue) => {
-          const project = await Project.findOneAndUpdate({
+          await Project.findOneAndUpdate({
             jiraKey: issue.key
           }, {
             createdAt: issue.fields.created,
@@ -73,9 +73,7 @@ const syncSalesJobs = async () => {
             upsert: true
           })
 
-          if (project) {
-            console.log(`[${issue.key}] synchronized`)
-          }
+          console.log(`[${issue.key}] synchronized`)
         })
       ])
 
