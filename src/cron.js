@@ -100,6 +100,8 @@ const syncSalesJobs = async () => {
 }
 
 const main = () => {
+  console.log('Cron started')
+
   cron.schedule(process.env.CRON_PATTERN ||  '*/5 * * * *', syncSalesJobs)
 }
 

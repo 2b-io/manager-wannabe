@@ -47,6 +47,7 @@
   },
   "scripts": {
     "start": "babel-node src/index.js",
+    "start:cron": "babel-node src/cron.js",
     "dev": "nodemon --exec babel-node -L src/index.js --watch src --ignore src/client --legacy-watch",
     "cron": "nodemon --exec babel-node -L src/cron.js --watch src --ignore src/client --legacy-watch",
     "build": "webpack --config webpack.config.js",
