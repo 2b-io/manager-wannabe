@@ -15,7 +15,8 @@ const schema = new mongoose.Schema({
   },
   jiraData: Object,
   createdAt: Date,
-  updatedAt: Date
+  updatedAt: Date,
+  starredBy: [String]
 })
 
 export default schema

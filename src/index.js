@@ -4,6 +4,7 @@ import MongoStore from 'connect-mongo'
 import Joi from 'joi'
 import express from 'express'
 import session from 'express-session'
+import morgan from 'morgan'
 
 import authMiddleware from './auth/middleware'
 import initPassport from './auth/passport'
@@ -34,6 +35,8 @@ const main = async () => {
   const unauthorizedStrict = authMiddleware((req, res, next) => {
     res.sendStatus(401)
   })
+
+  app.use(morgan('dev'))
 
   app.use('/api', unauthorizedStrict)
 
@@ -97,6 +100,9 @@ const main = async () => {
         status: {
           $in: params.status
         }
+      } : {}),
+      ...(params.starred ? {
+        starredBy: req.params.email
       } : {})
     }
 
@@ -116,23 +122,13 @@ const main = async () => {
         as: 'timelogs'
       }
     }, {
-      $lookup: {
-        from: 'projectStars',
-        localField: '_id',
-        foreignField: 'projectId',
-        as: 'stars',
-        pipeline: [
-          {
-            $match: {
-              userId: req.user._id
-            }
-          }
-        ]
-      }
-    }, {
       $addFields: {
         starred: {
-          $first: '$stars.starred'
+          $in: [
+            req.user.email, {
+              $ifNull: ['$starredBy', []]
+            }
+          ]
         }
       }
     },
@@ -181,8 +177,6 @@ const main = async () => {
 
     const total = await Project.countDocuments(matchOpt)
 
-    console.log(total)
-
     res.json({
       params: {
         ...params,
@@ -194,34 +188,37 @@ const main = async () => {
 
   app.post('/api/projects/:id/toggle-star', async (req, res, next) => {
     const db = req.app.get('db')
-    const {ProjectStar} = db.models
 
-    // ensure document exists
-    const currentState = await ProjectStar.findOne({
+    const {Project} = db.models
+
+    const project = (
+      await Project.findOneAndUpdate({
+        _id: req.params.id,
+        starredBy: req.user.email
+      }, {
+        $pull: {
+          starredBy: req.user.email
+        }
+      }, {
+        new: true
+      })
+    ) || (
+      await Project.findOneAndUpdate({
+        _id: req.params.id
+      }, {
+        $addToSet: {
+          starredBy: req.user.email
+        }
+      }, {
+        new: true
+      })
+    )
+
+    return res.json({
+      projectId: project._id,
       userId: req.user._id,
-      projectId: req.params.id,
+      starred: project.starredBy.indexOf(req.user.email) > -1
     })
-
-    const where = {
-      userId: req.user._id,
-      projectId: req.params.id,
-    }
-
-    if (currentState) {
-      where.starred = currentState.starred
-    } else {
-      where.starred = {$exists: 0}
-    }
-
-    // update
-    const state = await ProjectStar.findOneAndUpdate(where, {
-      starred: currentState ? !currentState.starred : true
-    }, {
-      new: true,
-      upsert: true
-    })
-
-    return res.json(state)
   })
 
   app.get('/api/timelogs', async (req, res, next) => {
