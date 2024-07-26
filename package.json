@@ -30,6 +30,7 @@
     "express-session": "1.18.0",
     "mongoose": "8.5.1",
     "ms": "2.1.3",
+    "node-cron": "3.0.3",
     "passport": "0.7.0",
     "passport-google-oauth2": "0.2.0",
     "pretty-ms": "9.1.0",
@@ -47,6 +48,7 @@
   "scripts": {
     "start": "babel-node src/index.js",
     "dev": "nodemon --exec babel-node -L src/index.js --watch src --ignore src/client --legacy-watch",
+    "cron": "nodemon --exec babel-node -L src/cron.js --watch src --ignore src/client --legacy-watch",
     "build": "webpack --config webpack.config.js",
     "serve": "nodemon --exec \"webpack serve --config webpack.config.js\" --watch webpack.config.js --legacy-watch"
   }

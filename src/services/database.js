@@ -1,8 +1,16 @@
 import mongoose from 'mongoose'
 
-import schemas from '../schemas' 
+import schemas from '../schemas'
+
+const singleton = {
+
+}
 
 const createConnection = async () => {
+  if (singleton.value) {
+    return singleton.value
+  }
+
   const connection = await mongoose.createConnection(process.env.MONGO_URL).asPromise()
 
   console.log('Database connected!')
@@ -14,10 +22,12 @@ const createConnection = async () => {
     }
   }, {})
 
-  return {
+  singleton.value = {
     connection,
     models
   }
+
+  return singleton.value
 }
 
 export default createConnection

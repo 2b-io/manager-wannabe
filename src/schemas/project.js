@@ -8,9 +8,14 @@ const schema = new mongoose.Schema({
   status: {
     type: String
   },
-  link: String
-}, {
-  timestamps: true
+  link: String,
+  jiraKey: {
+    type: String,
+    unique: true
+  },
+  jiraData: Object,
+  createdAt: Date,
+  updatedAt: Date
 })
 
 export default schema
