@@ -61,10 +61,7 @@ const syncSalesJobs = async () => {
       await Promise.all([
         issues.map(async (issue) => {
           const project = await Project.findOneAndUpdate({
-            jiraKey: issue.key,
-            updatedAt: {
-              $ne: issue.fields.updated
-            }
+            jiraKey: issue.key
           }, {
             createdAt: issue.fields.created,
             updatedAt: issue.fields.updated,
