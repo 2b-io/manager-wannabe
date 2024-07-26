@@ -1,8 +1,9 @@
 import 'dotenv/config'
 import bodyParse from 'body-parser'
+import MongoStore from 'connect-mongo'
+import Joi from 'joi'
 import express from 'express'
 import session from 'express-session'
-import MongoStore from 'connect-mongo'
 
 import authMiddleware from './auth/middleware'
 import initPassport from './auth/passport'
@@ -44,7 +45,70 @@ const main = async () => {
     const db = req.app.get('db')
     const {Project, User} = db.models
 
+    const VALID_STATUSES = [
+      'OPEN',
+      'IN CONVERSATION',
+      'NEED ESTIMATE',
+      'HAS ESTIMATE',
+      'FOLLOW UP',
+      'IN DEVELOPMENT',
+      'IN WARRANTY',
+      'CLOSED WON',
+      'CLOSED LOST'
+    ]
+
+    const VALID_SORT_OPTS = {
+      '-createdAt': {createdAt: -1},
+      'createdAt': {createdAt: 1},
+      '-updatedAt': {updatedAt: -1},
+      'updatedAt': {updatedAt: 1}
+    }
+
+    const schema = Joi.object({
+      name: Joi.string(),
+      status: Joi.array()
+        .items(Joi.string().valid(...VALID_STATUSES))
+        .single(),
+      sort: Joi.string()
+        .valid(...Object.keys(VALID_SORT_OPTS)),
+      skip: Joi.number().integer().positive().default(0),
+      limit: Joi.number().integer().positive().max(50).default(10),
+      starred: Joi.boolean()
+    })
+
+    const {error, value: params} = schema.validate(req.query)
+
+    if (error) {
+      return res.status(400).json(error)
+    }
+
+    const sortOpt = {
+      ...(VALID_SORT_OPTS[params.sort] || {}),
+      _id: -1
+    }
+
+    const matchOpt = {
+      ...(params.name ? {
+        name: {
+          $regex: new RegExp(params.name, 'i')
+        }
+      } : {}),
+      ...(params.status ? {
+        status: {
+          $in: params.status
+        }
+      } : {})
+    }
+
     const projects = await Project.aggregate([{
+      $match: matchOpt
+    }, {
+      $sort: sortOpt
+    }, {
+      $skip: params.skip
+    }, {
+      $limit: params.limit
+    }, {
       $lookup: {
         from: 'timelogs',
         localField: '_id',
@@ -94,6 +158,12 @@ const main = async () => {
         },
         starred: {
           $first: '$starred'
+        },
+        createdAt: {
+          $first: '$createdAt'
+        },
+        updatedAt: {
+          $first: '$updatedAt'
         }
       }
     }, {
@@ -106,12 +176,20 @@ const main = async () => {
         as: 'participants'
       }
     }, {
-      $sort: {
-        _id: 1
-      }
+      $sort: sortOpt
     }])
 
-    res.json(projects)
+    const total = await Project.countDocuments(matchOpt)
+
+    console.log(total)
+
+    res.json({
+      params: {
+        ...params,
+        total,
+      },
+      projects
+    })
   })
 
   app.post('/api/projects/:id/toggle-star', async (req, res, next) => {
