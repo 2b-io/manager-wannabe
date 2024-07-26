@@ -74,8 +74,8 @@ const main = async () => {
         .single(),
       sort: Joi.string()
         .valid(...Object.keys(VALID_SORT_OPTS)),
-      skip: Joi.number().integer().positive().default(0),
-      limit: Joi.number().integer().positive().max(50).default(10),
+      skip: Joi.number().integer().min(0).default(0),
+      limit: Joi.number().integer().positive().max(1000).default(10),
       starred: Joi.boolean()
     })
 
@@ -102,7 +102,7 @@ const main = async () => {
         }
       } : {}),
       ...(params.starred ? {
-        starredBy: req.params.email
+        starredBy: req.user.email
       } : {})
     }
 

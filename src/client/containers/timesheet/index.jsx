@@ -80,7 +80,6 @@ const Timesheet = () => {
     <Card loose>
       <Card.Header>
         <Text.PageTitle>Timesheet</Text.PageTitle>
-        <Button onClick={() => setShowLogTime(true)}>Log Time</Button>
       </Card.Header>
       <Card.Content>
         {timelogs.length > 0 && (
@@ -100,7 +99,7 @@ const Timesheet = () => {
             title="Edit timelog"
             component={(
               <TimelogForm
-                projects={projects}
+                project={projects[selectedTimelog.projectId]}
                 initialData={selectedTimelog}
                 onSubmit={(data) => {
                   dispatch(timelog.update(data))
@@ -110,27 +109,6 @@ const Timesheet = () => {
             )}
             onCloseClick={() => setSelectedTimelog(null)}
             onOutsideClick={() => setSelectedTimelog(null)}
-          />
-        )}
-        {showLogTime && (
-          <Modal
-            title="Log Time"
-            component={(
-              <TimelogForm
-                projects={projects}
-                initialData={{
-                  date: new Date(),
-                  spent: '',
-                  workType: user.defaultWorkType
-                }}
-                onSubmit={(data) => {
-                  dispatch(timelog.create(data))
-                  setShowLogTime(false)
-                }}
-              />
-            )}
-            onCloseClick={() => setShowLogTime(false)}
-            onOutsideClick={() => setShowLogTime(false)}
           />
         )}
       </Card.Content>

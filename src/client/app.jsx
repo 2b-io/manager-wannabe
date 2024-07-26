@@ -80,7 +80,7 @@ const router = createBrowserRouter([createProtectedRoute({
     index: true,
     element: <Dashboard />,
     loader: () => {
-      store.dispatch(project.fetch())
+      // store.dispatch(project.fetch())
       store.dispatch(timelog.fetch())
 
       return null
@@ -98,12 +98,7 @@ const router = createBrowserRouter([createProtectedRoute({
   }), createProtectedRoute({
     index: true,
     path: 'projects',
-    element: <Projects />,
-    loader: () => {
-      store.dispatch(project.fetch())
-
-      return null
-    }
+    element: <Projects />
   })]
 }), {
   path: '/login',

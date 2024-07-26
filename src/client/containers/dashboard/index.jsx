@@ -32,6 +32,8 @@ import {
   timelog as timelogAction
 } from 'state/actions'
 
+import hash from 'services/hash'
+
 import TimelogSummary from './timelog-summary'
 
 const ProjectList = ({projects, onEmpty, onProjectRender}) => {
@@ -48,13 +50,29 @@ const ProjectList = ({projects, onEmpty, onProjectRender}) => {
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const projects = useSelector((state) => state.project.projects)
+  const queries = useSelector((state) => state.project.queries)
+  const [params, setParams] = useState({
+    skip: 0,
+    starred: true
+  })
 
   const {user} = useOutletContext()
   const [timeLogFor, setTimeLogFor] = useState()
+  const [projects, setProjects] = useState([])
 
-  const allProjects = Object.values(projects)
-  const starredProjects = allProjects.filter((project) => project.starred)
+  useEffect(() => {
+    dispatch(projectAction.fetch(params))
+  }, [params])
+
+  useEffect(() => {
+    const queryHash = hash.obj(params)
+
+    if (!queryHash || !queries[queryHash]) {
+      return
+    }
+
+    setProjects(queries[queryHash])
+  }, [params, queries])
 
   return (
     <Grid fullWidth space="loose">
@@ -65,7 +83,7 @@ const Dashboard = () => {
           <Text.PageTitle>Starred Projects</Text.PageTitle>
         </Card.Header>
         <Card.Content>
-          <ProjectList projects={starredProjects}
+          <ProjectList projects={projects}
             onEmpty={() => (
               <EmptyState>
                 <RouterLink to="/projects">
@@ -81,11 +99,14 @@ const Dashboard = () => {
                   actions={[{
                     title: "Log Time",
                     icon: <FiClock />,
-                    onClick: () => setTimeLogFor(project._id)
+                    onClick: () => setTimeLogFor(project)
                   }, {
                     title: "Toggle Star",
                     icon: project.starred ? <FiStar fill="black" /> : <FiStar />,
-                    onClick: () => dispatch(projectAction.toggleStar(project._id))
+                    onClick: () => dispatch(projectAction.toggleStar({
+                      projectId: project._id,
+                      refetch: params
+                    }))
                   }]}
                 />
               )
@@ -98,9 +119,9 @@ const Dashboard = () => {
           title="Log Time"
           component={(
             <TimelogForm
-              projects={projects}
+              project={timeLogFor}
               initialData={{
-                projectId: timeLogFor,
+                projectId: timeLogFor._id,
                 date: new Date(),
                 spent: '',
                 workType: user.defaultWorkType

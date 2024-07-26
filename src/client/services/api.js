@@ -1,5 +1,7 @@
-export const fetchProjects = async () => {
-  const res = await fetch('/api/projects')
+export const fetchProjects = async (params) => {
+  const querystring = new URLSearchParams(params).toString()
+
+  const res = await fetch(`/api/projects?${querystring}`)
 
   const {projects} = await res.json()
 

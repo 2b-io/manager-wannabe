@@ -5,16 +5,19 @@ import {
   put,
   takeEvery
 } from 'redux-saga/effects'
+import shortHash from 'short-hash'
 
 import {
   fetchProjects,
   toggleStar
 } from 'services/api'
+import hash from 'services/hash'
 
 import actionCreatorFactory from './action-creator-factory'
 
 const initialState = {
-  projects: {}
+  projects: {},
+  queries: {}
 }
 
 const slide = createSlice({
@@ -36,6 +39,19 @@ const slide = createSlice({
       if (state.projects[projectId]) {
         state.projects[projectId].starred = starred
       }
+
+      Object.values(state.queries).forEach((projects) => {
+        projects.forEach((project) => {
+          if (project._id === projectId) {
+            project.starred = starred
+          }
+        })
+      })
+    },
+    cacheQuery: (state, action) => {
+      const {hash, projects} = action.payload
+
+      state.queries[hash] = projects
     }
   }
 })
@@ -52,18 +68,27 @@ export const actions = {
 export const saga = function* () {
   yield all([
     takeEvery(actions.fetch.type, function* (action) {
-      const projects = yield call(fetchProjects)
+      const params = action.payload
+      const projects = yield call(fetchProjects, params)
 
       yield put(actions.add({
-        projects,
-        clearBeforeAdd: true
+        projects
+      }))
+
+      yield put(actions.cacheQuery({
+        hash: hash.obj(params || {}),
+        projects
       }))
     }),
     takeEvery(actions.toggleStar.type, function* (action) {
-      const projectId = action.payload
+      const {projectId, refetch} = action.payload
       const starState = yield call(toggleStar, projectId)
 
       yield put(actions.updateStar(starState))
+
+      if (refetch) {
+        yield put(actions.fetch(refetch))
+      }
     })
   ])
 }

@@ -8,12 +8,12 @@ import Form from 'components/form'
 import dayjs from 'services/day'
 
 const TimelogForm = ({
-  projects,
+  project,
   initialData = {},
   onSubmit,
 }) => {
-  const sortedProjects = Object.values(projects)
-  const [selectedProjectId, setSelectedProjectId] = useState(initialData.projectId || sortedProjects[0]?._id)
+  // const sortedProjects = Object.values(projects)
+  // const [selectedProjectId, setSelectedProjectId] = useState(initialData.projectId || sortedProjects[0]?._id)
   const [workType, setWorkType] = useState(initialData.workType)
   const [date, setDate] = useState(new Date(initialData.date))
   const [spent, setSpent] = useState(initialData.spent)
@@ -24,7 +24,7 @@ const TimelogForm = ({
 
     onSubmit && onSubmit({
       ...initialData,
-      projectId: selectedProjectId,
+      // projectId: selectedProjectId,
       workType,
       date: date.toISOString(),
       spent,
@@ -37,18 +37,7 @@ const TimelogForm = ({
       <Form.ItemGroup>
         <Form.Item>
           <Form.Label>Project</Form.Label>
-          <Form.Select required
-            value={selectedProjectId}
-            onInput={(e) => setSelectedProjectId(e.target.value)}>
-            {sortedProjects.map((project) => {
-              return (
-                <option key={project._id}
-                  value={project._id}>
-                  {project.name}
-                </option>
-              )
-            })}
-          </Form.Select>
+          <Form.TextBox value={project.name} readOnly />
         </Form.Item>
         <Form.Item>
           <Form.Label>Work Type</Form.Label>
