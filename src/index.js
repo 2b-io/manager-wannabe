@@ -8,6 +8,7 @@ import morgan from 'morgan'
 
 import authMiddleware from './auth/middleware'
 import initPassport from './auth/passport'
+import project from './logic/project'
 import createConnection from './services/database'
 import workingTime from './services/working-time'
 
@@ -45,9 +46,6 @@ const main = async () => {
   })
 
   app.get('/api/projects', async (req, res, next) => {
-    const db = req.app.get('db')
-    const {Project, User} = db.models
-
     const VALID_STATUSES = [
       'OPEN',
       'IN CONVERSATION',
@@ -60,20 +58,13 @@ const main = async () => {
       'CLOSED LOST'
     ]
 
-    const VALID_SORT_OPTS = {
-      '-createdAt': {createdAt: -1},
-      'createdAt': {createdAt: 1},
-      '-updatedAt': {updatedAt: -1},
-      'updatedAt': {updatedAt: 1}
-    }
-
     const schema = Joi.object({
       name: Joi.string(),
       status: Joi.array()
         .items(Joi.string().valid(...VALID_STATUSES))
         .single(),
-      sort: Joi.string()
-        .valid(...Object.keys(VALID_SORT_OPTS)),
+      // sort: Joi.string()
+      //   .valid(...Object.keys(VALID_SORT_OPTS)),
       skip: Joi.number().integer().min(0).default(0),
       limit: Joi.number().integer().positive().max(1000).default(10),
       starred: Joi.boolean()
@@ -85,105 +76,25 @@ const main = async () => {
       return res.status(400).json(error)
     }
 
-    const sortOpt = {
-      ...(VALID_SORT_OPTS[params.sort] || {}),
-      _id: -1
-    }
-
-    const matchOpt = {
-      ...(params.name ? {
-        name: {
-          $regex: new RegExp(params.name, 'i')
-        }
-      } : {}),
-      ...(params.status ? {
-        status: {
-          $in: params.status
-        }
-      } : {}),
-      ...(params.starred ? {
-        starredBy: req.user.email
-      } : {})
-    }
-
-    const projects = await Project.aggregate([{
-      $match: matchOpt
-    }, {
-      $sort: sortOpt
-    }, {
-      $skip: params.skip
-    }, {
-      $limit: params.limit
-    }, {
-      $lookup: {
-        from: 'timelogs',
-        localField: '_id',
-        foreignField: 'projectId',
-        as: 'timelogs'
-      }
-    }, {
-      $addFields: {
-        starred: {
-          $in: [
-            req.user.email, {
-              $ifNull: ['$starredBy', []]
-            }
-          ]
-        }
-      }
-    },
-    {
-      $group: {
-        _id: '$_id',
-        totalSpentAsSeconds: {
-          $sum: {
-            $sum: '$timelogs.spentAsSeconds'
-          }
-        },
-        emails: {
-          $push: '$timelogs.email'
-        },
-        name: {
-          $first: '$name'
-        },
-        status: {
-          $first: '$status'
-        },
-        link: {
-          $first: '$link'
-        },
-        starred: {
-          $first: '$starred'
-        },
-        createdAt: {
-          $first: '$createdAt'
-        },
-        updatedAt: {
-          $first: '$updatedAt'
-        }
-      }
-    }, {
-      $unwind: '$emails'
-    }, {
-      $lookup: {
-        from: 'users',
-        localField: 'emails',
-        foreignField: 'email',
-        as: 'participants'
-      }
-    }, {
-      $sort: sortOpt
-    }])
-
-    const total = await Project.countDocuments(matchOpt)
-
-    res.json({
-      params: {
-        ...params,
-        total,
-      },
-      projects
+    const result = await project.fetch({
+      db: req.app.get('db'),
+      params,
+      user: req.user
     })
+
+    res.json(result)
+  })
+
+  app.get('/api/projects/:id', async (req, res, next) => {
+    const result = await project.get({
+      db: req.app.get('db'),
+      params: {
+        id: req.params.id
+      },
+      user: req.user
+    })
+
+    res.json(result)
   })
 
   app.post('/api/projects/:id/toggle-star', async (req, res, next) => {

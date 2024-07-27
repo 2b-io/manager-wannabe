@@ -8,6 +8,14 @@ export const fetchProjects = async (params) => {
   return projects
 }
 
+export const getProject = async (params) => {
+  const res = await fetch(`/api/projects/${params.id}`)
+
+  const project = await res.json()
+
+  return project
+}
+
 export const toggleStar = async (projectId) => {
   const res = await fetch(`/api/projects/${projectId}/toggle-star`, {
     method: 'post',
