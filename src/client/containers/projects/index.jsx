@@ -17,9 +17,10 @@ import Card from 'components/card'
 import EmptyState from 'components/empty-state'
 import Grid from 'components/grid'
 import Modal from 'components/modal'
-import Project from 'components/project'
 import Text from 'components/text'
 import TimelogForm from 'components/timelog-form'
+
+import Project from '../project'
 
 import {
   project as projectAction,
@@ -78,7 +79,7 @@ const Projects = () => {
               return (
                 <Project
                   key={project._id}
-                  data={project}
+                  data={project._id}
                   actions={[{
                     title: "Log Time",
                     icon: <FiClock />,
