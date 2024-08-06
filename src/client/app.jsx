@@ -23,7 +23,8 @@ import Timesheet from './containers/timesheet'
 import store from './state/store'
 import {
   project,
-  timelog
+  timelog,
+  ui
 } from './state/actions'
 
 const fetchUser = async () => {
@@ -81,7 +82,7 @@ const router = createBrowserRouter([createProtectedRoute({
     element: <Dashboard />,
     loader: () => {
       // store.dispatch(project.fetch())
-      store.dispatch(timelog.fetch())
+      // store.dispatch(timelog.fetch())
 
       return null
     }
@@ -90,8 +91,8 @@ const router = createBrowserRouter([createProtectedRoute({
     path: 'timesheet',
     element: <Timesheet />,
     loader: () => {
-      store.dispatch(project.fetch())
-      store.dispatch(timelog.fetch())
+      // store.dispatch(project.fetch())
+      // store.dispatch(timelog.fetch())
 
       return null
     }

@@ -1,7 +1,11 @@
 import shortHash from 'short-hash'
 
-const hashObj = (obj) => {
-  const str = JSON.stringify(obj, Object.keys(obj).sort())
+const hashObj = (obj, salt = '') => {
+  const target = {
+    ...obj, __SALT: salt
+  }
+
+  const str = JSON.stringify(target, Object.keys(target).sort())
 
   return shortHash(str)
 }

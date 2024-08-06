@@ -61,7 +61,7 @@ const Dashboard = () => {
   const [projects, setProjects] = useState([])
 
   useEffect(() => {
-    dispatch(projectAction.fetch(params))
+    // dispatch(projectAction.fetch(params))
   }, [params])
 
   useEffect(() => {

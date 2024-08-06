@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fi'
 import {useDispatch, useSelector} from 'react-redux'
 import {useOutletContext} from 'react-router-dom'
+import {createSelector} from 'reselect'
 
 import Button from 'components/button'
 import Card from 'components/card'
@@ -24,10 +25,19 @@ import Project from '../project'
 
 import {
   project as projectAction,
-  timelog as timelogAction
+  timelog as timelogAction,
+  ui as uiAction
 } from 'state/actions'
 
-import hash from 'services/hash'
+import hashService from 'services/hash'
+
+const selector = createSelector([
+  (state) => state.project.projects,
+  (state) => state.ui.dataBindings
+], (projects, timelogs) => ({
+  projects,
+  timelogs: Object.values(timelogs).sort((a, b) => new Date(b.date) - new Date(a.date))
+}))
 
 const ProjectList = ({projects, onEmpty, onProjectRender}) => {
   if (!projects || !projects.length) {
@@ -41,31 +51,32 @@ const ProjectList = ({projects, onEmpty, onProjectRender}) => {
   )
 }
 
-const Projects = () => {
-  const dispatch = useDispatch()
-  const queries = useSelector((state) => state.project.queries)
+const selectProjects = (state) => state.project.projects
+const selectDataBinding = (params) => (state) => state.ui.dataBindings[hashService.obj(params)]
 
+const Projects = () => {
   const {user} = useOutletContext()
   const [timeLogFor, setTimeLogFor] = useState()
   const [params, setParams] = useState({
     skip: 0,
     limit: 5
   })
-  const [projects, setProjects] = useState([])
+
+  const dispatch = useDispatch()
+  const projects = useSelector(createSelector([
+    selectProjects,
+    selectDataBinding(params)
+  ], (projects, dataBinding) => {
+    const data = dataBinding?.data || []
+
+    console.log('data', data)
+
+    return data.map((id) => projects[id])
+  }))
 
   useEffect(() => {
-    dispatch(projectAction.fetch(params))
+    dispatch(uiAction.fetchProjects(params))
   }, [params])
-
-  useEffect(() => {
-    const queryHash = hash.obj(params)
-
-    if (!queryHash || !queries[queryHash]) {
-      return
-    }
-
-    setProjects(queries[queryHash])
-  }, [params, queries])
 
   return (
     <Grid fullWidth space="loose">
@@ -123,4 +134,4 @@ const Projects = () => {
   )
 }
 
-export default Projects
+export default React.memo(Projects)
