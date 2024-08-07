@@ -85,6 +85,14 @@ const main = async () => {
     res.json(result)
   })
 
+  app.get('/api/projects/meta', async (req, res, next) => {
+    const projects = await project.fetchMeta({
+      db: req.app.get('db')
+    })
+
+    res.json(projects)
+  })
+
   app.get('/api/projects/:id', async (req, res, next) => {
     const result = await project.get({
       db: req.app.get('db'),

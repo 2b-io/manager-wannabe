@@ -8,6 +8,7 @@ import {
 import ms from 'ms'
 
 import {
+  fetchProjectMeta,
   fetchProjects,
   toggleStar
 } from 'services/api'
@@ -42,6 +43,7 @@ export const reducer = slide.reducer
 export const actions = {
   ...slide.actions,
   fetchProjects: actionCreatorFactory(slide.name)('fetchProjects'),
+  fetchProjectMeta: actionCreatorFactory(slide.name)('fetchProjectMeta')
 }
 
 // saga
@@ -65,6 +67,13 @@ export const saga = function* () {
           params: data.params,
           total: data.total
         }
+      }))
+    }),
+    takeEvery(actions.fetchProjectMeta.type, function* (action) {
+      const data = yield call(fetchProjectMeta)
+
+      yield put(projectAction.add({
+        projects: data.projects
       }))
     })
   ])

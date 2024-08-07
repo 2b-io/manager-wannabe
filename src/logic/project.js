@@ -128,13 +128,26 @@ const get = async ({
         _id: new mongoose.Types.ObjectId(params.id)
       }
     },
-    ...singleProjectAggregate({email: user.email})
+    ...singleProjectAggregate({
+      email: user.email
+    })
   ])
 
   return projects[0]
 }
 
+const fetchMeta = async ({db}) => {
+  const {Project} = db.models
+
+  const projects = await Project
+    .find({})
+    .select('_id name')
+
+  return projects
+}
+
 export default {
   fetch,
-  get
+  get,
+  fetchMeta
 }

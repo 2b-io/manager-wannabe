@@ -44,7 +44,6 @@ const StatusFiltering = ({
                 <FiCircle />
               )}
               {status}
-              
             </StatusBadge>
           </List.Item>
         )

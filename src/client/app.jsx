@@ -82,7 +82,7 @@ const router = createBrowserRouter([createProtectedRoute({
     element: <Dashboard />,
     loader: () => {
       // store.dispatch(project.fetch())
-      // store.dispatch(timelog.fetch())
+      store.dispatch(timelog.fetch())
 
       return null
     }
@@ -91,8 +91,8 @@ const router = createBrowserRouter([createProtectedRoute({
     path: 'timesheet',
     element: <Timesheet />,
     loader: () => {
-      // store.dispatch(project.fetch())
-      // store.dispatch(timelog.fetch())
+      store.dispatch(ui.fetchProjectMeta())
+      store.dispatch(timelog.fetch())
 
       return null
     }

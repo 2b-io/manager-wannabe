@@ -63,7 +63,7 @@ const Project = ({
             </List.Item>
           </List>
           <List>
-            {project.participants.map((user) => (
+            {(project.participants || []).map((user) => (
               <List.Item key={user.email}>
                 <Avatar data={user} />
               </List.Item>
