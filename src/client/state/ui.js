@@ -8,15 +8,19 @@ import {
 import ms from 'ms'
 
 import {
-  fetchProjectMeta,
-  fetchProjects,
-  toggleStar
+  getProject,
+  getProjectMeta,
+  queryProjects,
+  toggleStar,
+  createTimelog,
+  updateTimelog
 } from 'services/api'
 import hashService from 'services/hash'
 
 import actionCreatorFactory from './action-creator-factory'
 import {
-  project as projectAction
+  project as projectAction,
+  timelog as timelogAction
 } from './actions'
 
 const initialState = {
@@ -42,18 +46,21 @@ const slide = createSlice({
 export const reducer = slide.reducer
 export const actions = {
   ...slide.actions,
-  fetchProjects: actionCreatorFactory(slide.name)('fetchProjects'),
-  fetchProjectMeta: actionCreatorFactory(slide.name)('fetchProjectMeta')
+  getProject: actionCreatorFactory(slide.name)('getProject'),
+  getProjectMeta: actionCreatorFactory(slide.name)('getProjectMeta'),
+  queryProjects: actionCreatorFactory(slide.name)('queryProjects'),
+  createTimelog: actionCreatorFactory(slide.name)('createTimelog'),
+  updateTimelog: actionCreatorFactory(slide.name)('updateTimelog')
 }
 
 // saga
 export const saga = function* () {
   yield all([
-    takeEvery(actions.fetchProjects.type, function* (action) {
+    takeEvery(actions.queryProjects.type, function* (action) {
       const params = action.payload
       const hash = hashService.obj(params || {})
 
-      const data = yield call(fetchProjects, params)
+      const data = yield call(queryProjects, params)
 
       yield put(projectAction.add({
         projects: data.projects
@@ -69,11 +76,42 @@ export const saga = function* () {
         }
       }))
     }),
-    takeEvery(actions.fetchProjectMeta.type, function* (action) {
-      const data = yield call(fetchProjectMeta)
+    takeEvery(actions.getProject.type, function* (action) {
+      const project = yield call(getProject, {
+        id: action.payload.id
+      })
+
+      yield put(projectAction.add({
+        projects: [project]
+      }))
+    }),
+    takeEvery(actions.getProjectMeta.type, function* (action) {
+      const data = yield call(getProjectMeta)
 
       yield put(projectAction.add({
         projects: data.projects
+      }))
+    }),
+    takeEvery(actions.createTimelog.type, function* (action) {
+      const timelog = yield call(createTimelog, action.payload)
+
+      yield put(timelogAction.add({
+        timelogs: [timelog]
+      }))
+
+      yield put(actions.getProject({
+        id: timelog.projectId
+      }))
+    }),
+    takeEvery(actions.updateTimelog.type, function* (action) {
+      const timelog = yield call(updateTimelog, action.payload)
+
+      yield put(timelogAction.add({
+        timelogs: [timelog]
+      }))
+
+      yield put(actions.getProject({
+        id: timelog.projectId
       }))
     })
   ])

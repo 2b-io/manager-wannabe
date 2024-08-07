@@ -74,7 +74,7 @@ const Dashboard = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(uiAction.fetchProjects(params))
+    dispatch(uiAction.queryProjects(params))
   }, [params])
 
   return (
@@ -130,7 +130,7 @@ const Dashboard = () => {
                 workType: user.defaultWorkType
               }}
               onSubmit={(data) => {
-                dispatch(timelogAction.create(data))
+                dispatch(uiAction.createTimelog(data))
                 setTimeLogFor(null)
               }}
             />

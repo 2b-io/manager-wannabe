@@ -91,7 +91,7 @@ const router = createBrowserRouter([createProtectedRoute({
     path: 'timesheet',
     element: <Timesheet />,
     loader: () => {
-      store.dispatch(ui.fetchProjectMeta())
+      store.dispatch(ui.getProjectMeta())
       store.dispatch(timelog.fetch())
 
       return null

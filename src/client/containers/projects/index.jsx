@@ -82,7 +82,7 @@ const Projects = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(uiAction.fetchProjects(params))
+    dispatch(uiAction.queryProjects(params))
   }, [params])
 
   // pagination logic
@@ -116,6 +116,7 @@ const Projects = () => {
 
     setParams({
       ...params,
+      skip: 0,
       status: selected
     })
   }
@@ -178,7 +179,7 @@ const Projects = () => {
                 workType: user.defaultWorkType
               }}
               onSubmit={(data) => {
-                dispatch(timelogAction.create(data))
+                dispatch(uiAction.createTimelog(data))
                 setTimeLogFor(null)
               }}
             />

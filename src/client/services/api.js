@@ -1,4 +1,4 @@
-export const fetchProjectMeta = async () => {
+export const getProjectMeta = async () => {
   const res = await fetch('/api/projects/meta')
   const projects = await res.json()
 
@@ -7,7 +7,7 @@ export const fetchProjectMeta = async () => {
   }
 }
 
-export const fetchProjects = async (params) => {
+export const queryProjects = async (params) => {
   const querystring = new URLSearchParams()
   Object.entries(params).forEach(([key, value]) => {
     if (Array.isArray(value)) {

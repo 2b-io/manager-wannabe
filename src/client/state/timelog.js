@@ -45,21 +45,12 @@ export const reducer = slide.reducer
 export const actions = {
   ...slide.actions,
   // other actions that don't change state
-  create: actionCreatorFactory(slide.name)('create'),
-  fetch: actionCreatorFactory(slide.name)('fetch'),
-  update: actionCreatorFactory(slide.name)('update'),
+  fetch: actionCreatorFactory(slide.name)('fetch')
 }
 
 // saga
 export const saga = function* () {
   yield all([
-    takeEvery(actions.create.type, function* (action) {
-      const timelog = yield call(createTimelog, action.payload)
-
-      yield put(actions.add({
-        timelogs: [timelog]
-      }))
-    }),
     takeEvery(actions.fetch.type, function* (action) {
       const timelogs = yield call(fetchTimelogs)
 
@@ -67,13 +58,6 @@ export const saga = function* () {
         timelogs,
         clearBeforeAdd: true
       }))
-    }),
-    takeEvery(actions.update.type, function* (action) {
-      const timelog = yield call(updateTimelog, action.payload)
-
-      yield put(actions.add({
-        timelogs: [timelog]
-      })) 
     })
   ])
 }

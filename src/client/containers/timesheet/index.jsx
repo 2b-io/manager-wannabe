@@ -18,7 +18,10 @@ import Modal from 'components/modal'
 import Text from 'components/text'
 import TimelogForm from 'components/timelog-form'
 
-import {timelog} from 'state/actions'
+import {
+  timelog,
+  ui as uiAction
+} from 'state/actions'
 
 const selector = createSelector([
   (state) => state.project.projects,
@@ -102,7 +105,7 @@ const Timesheet = () => {
                 project={projects[selectedTimelog.projectId]}
                 initialData={selectedTimelog}
                 onSubmit={(data) => {
-                  dispatch(timelog.update(data))
+                  dispatch(uiAction.updateTimelog(data))
                   setSelectedTimelog(null)
                 }}
               />
