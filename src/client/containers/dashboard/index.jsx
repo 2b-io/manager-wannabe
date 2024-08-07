@@ -42,11 +42,14 @@ const selectProjectsByParams = createSelector([
   (state) => state.project.projects,
   (state, params, salt) => state.ui.dataBindings[hashService.obj(params, salt)]
 ], (projects, dataBinding) => {
-  const data = dataBinding?.data || []
+  const data = dataBinding?.data || {}
 
   console.log('selector', data)
 
-  return data.map((id) => projects[id])
+  return {
+    ...data,
+    projects: (data.ids || []).map((id) => projects[id])
+  }
 })
 
 const ProjectList = ({projects, onEmpty, onProjectRender}) => {
@@ -69,7 +72,7 @@ const Dashboard = () => {
   })
   const [timeLogFor, setTimeLogFor] = useState()
 
-  const projects = useSelector((state) => selectProjectsByParams(state, params))
+  const data = useSelector((state) => selectProjectsByParams(state, params))
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -85,7 +88,7 @@ const Dashboard = () => {
           <Text.PageTitle>Starred Projects</Text.PageTitle>
         </Card.Header>
         <Card.Content>
-          <ProjectList projects={projects}
+          <ProjectList projects={data.projects}
             onEmpty={() => (
               <EmptyState>
                 <RouterLink to="/projects">

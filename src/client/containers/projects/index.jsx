@@ -21,7 +21,7 @@ import Modal from 'components/modal'
 import Text from 'components/text'
 import TimelogForm from 'components/timelog-form'
 
-import Project from '../project'
+import Project from 'components/project'
 
 import {
   project as projectAction,
@@ -30,6 +30,8 @@ import {
 } from 'state/actions'
 
 import hashService from 'services/hash'
+
+const PAGE_SIZE = 10
 
 const ProjectList = ({projects, onEmpty, onProjectRender}) => {
   if (!projects || !projects.length) {
@@ -47,44 +49,61 @@ const selectProjectsByParams = createSelector([
   (state) => state.project.projects,
   (state, params, salt) => state.ui.dataBindings[hashService.obj(params, salt)]
 ], (projects, dataBinding) => {
-  const data = dataBinding?.data || []
+  const data = dataBinding?.data || {}
 
   console.log('selector', data)
 
-  return data.map((id) => projects[id])
+  return {
+    ...data,
+    projects: (data.ids || []).map((id) => projects[id])
+  }
 })
 
 const Projects = () => {
   const {user} = useOutletContext()
   const [timeLogFor, setTimeLogFor] = useState()
-  const [params, setParams] = useState({
-    skip: 0,
-    limit: 5
-  })
   const [skip, setSkip] = useState(0)
 
-  const projects = useSelector((state) => selectProjectsByParams(state, params))
+  const data = useSelector((state) => selectProjectsByParams(state, {
+    skip,
+    limit: PAGE_SIZE
+  }))
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('params changed', params)
+    console.log('params changed', skip)
 
-    dispatch(uiAction.fetchProjects(params))
-  }, [params])
+    dispatch(uiAction.fetchProjects({
+      skip,
+      limit: PAGE_SIZE
+    }))
+  }, [skip])
+
+  // pagination logic
+  const canPrev = data?.params?.skip > 0
+  const canNext = data?.params?.skip + PAGE_SIZE < data?.total
 
   return (
     <Grid fullWidth space="loose">
       <Card loose>
         <Card.Header>
           <Text.PageTitle>All Projects</Text.PageTitle>
+          <Card.HeaderAction disabled={!canPrev}
+            onClick={() => setSkip(Math.max(0, skip - 10))}>
+            <FiChevronLeft />
+          </Card.HeaderAction>
+          <Card.HeaderAction disabled={!canNext}
+            onClick={() => setSkip(skip + 10)}>
+            <FiChevronRight />
+          </Card.HeaderAction>
         </Card.Header>
         <Card.Content>
-          <ProjectList projects={projects}
+          <ProjectList projects={data.projects}
             onProjectRender={(project) => {
               return (
                 <Project
                   key={project._id}
-                  data={project._id}
+                  data={project}
                   actions={[{
                     title: "Log Time",
                     icon: <FiClock />,

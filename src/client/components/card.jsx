@@ -47,6 +47,11 @@ const HeaderAction = styled.button`
       filter: invert(100%);
     }
   }
+
+  &[disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 `
 
 const Content = styled.div`

@@ -51,16 +51,20 @@ export const saga = function* () {
       const params = action.payload
       const hash = hashService.obj(params || {})
 
-      const projects = yield call(fetchProjects, params)
+      const data = yield call(fetchProjects, params)
 
       yield put(projectAction.add({
-        projects
+        projects: data.projects
       }))
 
       yield put(actions.bindData({
         hash,
         expiry: Date.now() + ms('3m'),
-        data: projects.map((project) => project._id)
+        data: {
+          ids: data.projects.map((project) => project._id),
+          params: data.params,
+          total: data.total
+        }
       }))
     })
   ])

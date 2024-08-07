@@ -3,9 +3,7 @@ export const fetchProjects = async (params) => {
 
   const res = await fetch(`/api/projects?${querystring}`)
 
-  const {projects} = await res.json()
-
-  return projects
+  return await res.json()
 }
 
 export const getProject = async (params) => {

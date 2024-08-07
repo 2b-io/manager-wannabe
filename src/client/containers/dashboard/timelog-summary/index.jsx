@@ -138,9 +138,7 @@ const TimelogSummary = () => {
     <Card loose>
       <Card.Header>
         <Text.PageTitle>Summary {date.format('MM/YYYY')}</Text.PageTitle>
-        <Card.HeaderAction onClick={() => {
-          setDate(() => date.subtract(1, 'M'))
-        }}>
+        <Card.HeaderAction onClick={() => setDate(date.subtract(1, 'M'))}>
           <FiChevronLeft />
         </Card.HeaderAction>
         <Card.HeaderAction onClick={() => setDate(dayjs().startOf('month'))}>
