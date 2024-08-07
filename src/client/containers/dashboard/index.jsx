@@ -17,6 +17,7 @@ import {
   Link as RouterLink,
   useOutletContext
 } from 'react-router-dom'
+import {createSelector} from 'reselect'
 
 import Button from 'components/button'
 import Card from 'components/card'
@@ -29,12 +30,24 @@ import TimelogForm from 'components/timelog-form'
 import Project from '../project'
 import {
   project as projectAction,
-  timelog as timelogAction
+  timelog as timelogAction,
+  ui as uiAction
 } from 'state/actions'
 
-import hash from 'services/hash'
+import hashService from 'services/hash'
 
 import TimelogSummary from './timelog-summary'
+
+const selectProjectsByParams = createSelector([
+  (state) => state.project.projects,
+  (state, params, salt) => state.ui.dataBindings[hashService.obj(params, salt)]
+], (projects, dataBinding) => {
+  const data = dataBinding?.data || []
+
+  console.log('selector', data)
+
+  return data.map((id) => projects[id])
+})
 
 const ProjectList = ({projects, onEmpty, onProjectRender}) => {
   if (!projects || !projects.length) {
@@ -49,30 +62,19 @@ const ProjectList = ({projects, onEmpty, onProjectRender}) => {
 }
 
 const Dashboard = () => {
-  const dispatch = useDispatch()
-  const queries = useSelector((state) => state.project.queries)
+  const {user} = useOutletContext()
   const [params, setParams] = useState({
     skip: 0,
     starred: true
   })
-
-  const {user} = useOutletContext()
   const [timeLogFor, setTimeLogFor] = useState()
-  const [projects, setProjects] = useState([])
+
+  const projects = useSelector((state) => selectProjectsByParams(state, params))
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    // dispatch(projectAction.fetch(params))
+    dispatch(uiAction.fetchProjects(params))
   }, [params])
-
-  useEffect(() => {
-    const queryHash = hash.obj(params)
-
-    if (!queryHash || !queries[queryHash]) {
-      return
-    }
-
-    setProjects(queries[queryHash])
-  }, [params, queries])
 
   return (
     <Grid fullWidth space="loose">

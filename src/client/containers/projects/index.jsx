@@ -31,14 +31,6 @@ import {
 
 import hashService from 'services/hash'
 
-const selector = createSelector([
-  (state) => state.project.projects,
-  (state) => state.ui.dataBindings
-], (projects, timelogs) => ({
-  projects,
-  timelogs: Object.values(timelogs).sort((a, b) => new Date(b.date) - new Date(a.date))
-}))
-
 const ProjectList = ({projects, onEmpty, onProjectRender}) => {
   if (!projects || !projects.length) {
     return onEmpty ? onEmpty() : null
@@ -51,8 +43,16 @@ const ProjectList = ({projects, onEmpty, onProjectRender}) => {
   )
 }
 
-const selectProjects = (state) => state.project.projects
-const selectDataBinding = (params) => (state) => state.ui.dataBindings[hashService.obj(params)]
+const selectProjectsByParams = createSelector([
+  (state) => state.project.projects,
+  (state, params, salt) => state.ui.dataBindings[hashService.obj(params, salt)]
+], (projects, dataBinding) => {
+  const data = dataBinding?.data || []
+
+  console.log('selector', data)
+
+  return data.map((id) => projects[id])
+})
 
 const Projects = () => {
   const {user} = useOutletContext()
@@ -61,20 +61,14 @@ const Projects = () => {
     skip: 0,
     limit: 5
   })
+  const [skip, setSkip] = useState(0)
 
+  const projects = useSelector((state) => selectProjectsByParams(state, params))
   const dispatch = useDispatch()
-  const projects = useSelector(createSelector([
-    selectProjects,
-    selectDataBinding(params)
-  ], (projects, dataBinding) => {
-    const data = dataBinding?.data || []
-
-    console.log('data', data)
-
-    return data.map((id) => projects[id])
-  }))
 
   useEffect(() => {
+    console.log('params changed', params)
+
     dispatch(uiAction.fetchProjects(params))
   }, [params])
 

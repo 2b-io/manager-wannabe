@@ -109,12 +109,12 @@ const router = createBrowserRouter([createProtectedRoute({
 
 const App = () => {
   return (
-    <React.StrictMode>
+    <React.Fragment>
       <GlobalStyle />
       <StateProvider store={store}>
         <RouterProvider router={router} />
       </StateProvider>
-    </React.StrictMode>
+    </React.Fragment>
   )
 }
 
