@@ -2,14 +2,14 @@ import mongoose from 'mongoose'
 
 export const STATUSES = [
   'OPEN',
-  'IN CONVERSATION',
-  'NEED ESTIMATE',
-  'HAS ESTIMATE',
-  'FOLLOW UP',
-  'IN DEVELOPMENT',
-  'IN WARRANTY',
-  'CLOSED WON',
-  'CLOSED LOST'
+  'IN_CONVERSATION',
+  'NEED_ESTIMATE',
+  'HAS_ESTIMATE',
+  'FOLLOW_UP',
+  'IN_DEVELOPMENT',
+  'IN_WARRANTY',
+  'CLOSED_WON',
+  'CLOSED_LOST'
 ]
 
 const schema = new mongoose.Schema({

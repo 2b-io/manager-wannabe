@@ -44,8 +44,6 @@ const selectProjectsByParams = createSelector([
 ], (projects, dataBinding) => {
   const data = dataBinding?.data || {}
 
-  console.log('selector', data)
-
   return {
     ...data,
     projects: (data.ids || []).map((id) => projects[id])

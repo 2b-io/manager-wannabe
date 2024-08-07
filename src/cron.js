@@ -9,7 +9,9 @@ import jira from './services/jira'
 const cronState = {}
 
 const normalizeStatus = (status) => {
-  return status.toUpperCase().replace(/-/g, ' ')
+  return status
+    .toUpperCase().replace(/-/g, '_')
+    .toUpperCase().replace(/\s/g, '_')
 }
 
 const syncSalesJobs = async () => {

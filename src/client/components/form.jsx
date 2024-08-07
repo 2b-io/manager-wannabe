@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import CalendarSvg from './calendar-16.svg'
 import ChevronDownSvg from './chevron-down-16.svg'
 
-console.log(ChevronDownSvg)
-
 const Form = styled.form`
   display: grid;
   grid-gap: 2rem;

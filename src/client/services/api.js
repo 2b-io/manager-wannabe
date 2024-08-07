@@ -1,7 +1,14 @@
 export const fetchProjects = async (params) => {
-  const querystring = new URLSearchParams(params).toString()
+  const querystring = new URLSearchParams()
+  Object.entries(params).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach((v) => querystring.append(key, v))
+    } else {
+      querystring.append(key, value)
+    }
+  })
 
-  const res = await fetch(`/api/projects?${querystring}`)
+  const res = await fetch(`/api/projects?${querystring.toString()}`)
 
   return await res.json()
 }

@@ -2,9 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Grid = styled(
-  ({fullWidth, ...props}) => <div {...props} />
+  ({fullWidth, loose, ...props}) => <div {...props} />
 )`
   display: grid;
+  
   ${({space}) => {
     switch (space) {
       case 'loose':

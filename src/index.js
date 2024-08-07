@@ -48,14 +48,14 @@ const main = async () => {
   app.get('/api/projects', async (req, res, next) => {
     const VALID_STATUSES = [
       'OPEN',
-      'IN CONVERSATION',
-      'NEED ESTIMATE',
-      'HAS ESTIMATE',
-      'FOLLOW UP',
-      'IN DEVELOPMENT',
-      'IN WARRANTY',
-      'CLOSED WON',
-      'CLOSED LOST'
+      'IN_CONVERSATION',
+      'NEED_ESTIMATE',
+      'HAS_ESTIMATE',
+      'FOLLOW_UP',
+      'IN_DEVELOPMENT',
+      'IN_WARRANTY',
+      'CLOSED_WON',
+      'CLOSED_LOST'
     ]
 
     const schema = Joi.object({
