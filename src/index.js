@@ -105,6 +105,18 @@ const main = async () => {
     res.json(result)
   })
 
+  app.get('/api/projects/:id/summary', async (req, res, next) => {
+    const result = await project.summarize({
+      db: req.app.get('db'),
+      params: {
+        id: req.params.id
+      },
+      user: req.user
+    })
+
+    res.json(result)
+  })
+
   app.post('/api/projects/:id/toggle-star', async (req, res, next) => {
     const db = req.app.get('db')
 

@@ -146,8 +146,44 @@ const fetchMeta = async ({db}) => {
   return projects
 }
 
+const summarize = async ({
+  db,
+  params,
+  user
+}) => {
+  const {
+    Project,
+    Timelog
+  } = db.models
+
+  const result = await Timelog.aggregate([
+    {
+      $match: {
+        projectId: new mongoose.Types.ObjectId(params.id)
+      }
+    },
+    {
+      $group: {
+        _id: '$email',
+        totalSpentAsSeconds: {
+          $sum: '$spentAsSeconds'
+        },
+        from: {
+          $min: '$date'
+        },
+        to: {
+          $max: '$date'
+        }
+      }
+    }
+  ])
+
+  return result
+}
+
 export default {
   fetch,
   get,
-  fetchMeta
+  fetchMeta,
+  summarize
 }

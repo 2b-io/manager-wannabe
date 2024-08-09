@@ -10,12 +10,14 @@ module.exports = {
   output: {
     filename: 'assets/main.[contenthash:6].js',
     path: path.join(root, 'public'),
+    publicPath: '/',
     clean: true
   },
   devServer: {
     port: process.env.PORT || 3000,
     client: {
-      logging: 'verbose'
+      logging: 'verbose',
+      overlay: true
     },
     proxy: [{
       context: ['/api', '/auth'],
