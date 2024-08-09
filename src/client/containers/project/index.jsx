@@ -1,13 +1,13 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
+import {useParams} from 'react-router-dom'
 
 import Project from 'components/project'
 
 export default ({
-  actions,
-  data: projectId
+  actions
 }) => {
-  const project = useSelector((state) => state.project.projects[projectId])
+  const {projectId} = useParams()
 
-  return <Project actions={actions} data={project} />
+  return <div>{projectId}</div>
 }

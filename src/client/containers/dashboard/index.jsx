@@ -27,7 +27,7 @@ import Modal from 'components/modal'
 import Text from 'components/text'
 import TimelogForm from 'components/timelog-form'
 
-import Project from '../project'
+import Project from 'components/project'
 import {
   project as projectAction,
   timelog as timelogAction,
@@ -98,7 +98,7 @@ const Dashboard = () => {
               return (
                 <Project
                   key={project._id}
-                  data={project._id}
+                  data={project}
                   actions={[{
                     title: "Log Time",
                     icon: <FiClock />,

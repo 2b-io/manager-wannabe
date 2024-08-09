@@ -17,6 +17,7 @@ import GlobalStyle from './global-style'
 import Login from './containers/login'
 import Layout from './containers/layout'
 import Dashboard from './containers/dashboard'
+import Project from './containers/project'
 import Projects from './containers/projects'
 import Timesheet from './containers/timesheet'
 
@@ -96,6 +97,10 @@ const router = createBrowserRouter([createProtectedRoute({
 
       return null
     }
+  }), createProtectedRoute({
+    index: true,
+    path: 'projects/:projectId',
+    element: <Project />
   }), createProtectedRoute({
     index: true,
     path: 'projects',

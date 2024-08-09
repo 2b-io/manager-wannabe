@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import Badge from 'components/badge'
 import Card from 'components/card'
 import Grid from 'components/grid'
+import Link from 'components/link'
 import List from 'components/list'
 import Text from 'components/text'
 
@@ -40,10 +41,14 @@ const Project = ({
   actions = [],
   data: project
 }) => {
+  const projectUrl = `/projects/${project._id}`
+
   return (
     <Card highlighted>
       <Card.Header>
-        <Text.SectionTitle>{project.name}</Text.SectionTitle>
+        <Text.SectionTitle as={Link} to={projectUrl}>
+          {project.name}
+        </Text.SectionTitle>
         {actions.map((action, index) => {
           return (
             <Card.HeaderAction
