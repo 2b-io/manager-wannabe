@@ -9,6 +9,7 @@ import morgan from 'morgan'
 import authMiddleware from './auth/middleware'
 import initPassport from './auth/passport'
 import project from './logic/project'
+import timelogLogic from './logic/timelog'
 import createConnection from './services/database'
 import workingTime from './services/working-time'
 
@@ -164,43 +165,40 @@ const main = async () => {
   })
 
   app.post('/api/timelogs', bodyParse.json(), async (req, res, next) => {
-    const db = req.app.get('db')
-    const {Timelog} = db.models
+    // const db = req.app.get('db')
+    // const {Timelog} = db.models
 
-    const data = {
-      ...req.body,
-      email: req.user.email
-    }
+    // const data = {
+    //   ...req.body,
+    //   email: req.user.email
+    // }
 
-    data.spentAsSeconds = workingTime.toNumber(data.spent)
-    // normalize
-    data.spent = workingTime.toString(data.spentAsSeconds)
+    // data.spentAsSeconds = workingTime.toNumber(data.spent)
+    // // normalize
+    // data.spent = workingTime.toString(data.spentAsSeconds)
 
-    const timelog = data._id ? 
-      (await Timelog.findByIdAndUpdate(data._id, data, {new: true})) :
-      (await Timelog.create(data))
+    // const timelog = data._id ?
+    //   (await Timelog.findByIdAndUpdate(data._id, data, {new: true})) :
+    //   (await Timelog.create(data))
+
+    const timelog = await timelogLogic.create({
+      db: req.app.get('db'),
+      params: req.body,
+      user: req.user
+    })
 
     res.status(201).json(timelog)
   })
 
   app.put('/api/timelogs/:id', bodyParse.json(), async (req, res, next) => {
-    const db = req.app.get('db')
-    const {Timelog} = db.models
-
-    const data = {
-      ...req.body,
-      forceUnlocked: false
-    }
-
-    data.spentAsSeconds = workingTime.toNumber(data.spent)
-    // normalize
-    data.spent = workingTime.toString(data.spentAsSeconds)
-
-    const timelog = await Timelog.findByIdAndUpdate(req.params.id, data, {
-      new: true
+    const timelog = await timelogLogic.update({
+      db: req.app.get('db'),
+      id: req.params.id,
+      params: req.body,
+      user: req.user
     })
 
-    res.status(201).json(timelog)
+    res.status(200).json(timelog)
   })
 
   const PORT = process.env.PORT_API || 3001
