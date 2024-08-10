@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Header = styled.div`
   display: flex;
-  padding: 1rem 2rem;
+  padding: 1rem;
   line-height: 4rem;
   background: whitesmoke;
 
@@ -55,7 +55,7 @@ const HeaderAction = styled.button`
 `
 
 const Content = styled.div`
-  padding: 2rem;
+  padding: 1rem;
 `
 
 const Card = styled(

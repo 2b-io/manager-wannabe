@@ -26,7 +26,7 @@ const TimelogForm = ({
       ...initialData,
       // projectId: selectedProjectId,
       workType,
-      date: date.toISOString(),
+      date: dayjs(date).startOf('day').toISOString(),
       spent,
       workDescription
     })

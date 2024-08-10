@@ -19,7 +19,7 @@ const notify = async ({
       `<users/${user.profiles.google.id}>` :
       `\`${user.email}\``
 
-    const message = `${userName} spent \`${timelog.spent}\` on \`${project.name} \``
+    const message = `${userName} spent \`${timelog.spent} \` on \`${project.name} \``
 
     const res = await fetch(process.env.GOOGLE_CHAT_WEBHOOK, {
       method: 'POST',
@@ -33,7 +33,7 @@ const notify = async ({
           card: {
             sections: [
               {
-                header: 'Timelog',
+                header: `Timelog [${timelog._id.toString()}]`,
                 widgets: [
                   {
                     decoratedText: {
