@@ -15,8 +15,11 @@ const notify = async ({
       throw new Error('Project Not Found')
     }
 
+    // const userName = user.profiles?.google ?
+    //   `<users/${user.profiles.google.id}>` :
+    //   `\`${user.email}\``
     const userName = user.profiles?.google ?
-      `<users/${user.profiles.google.id}>` :
+      `*${user.profiles.google.displayName}*` :
       `\`${user.email}\``
 
     const message = `${userName} spent \`${timelog.spent} \` on \`${project.name} \``
