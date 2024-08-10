@@ -66,6 +66,7 @@ const Dashboard = () => {
   const {user} = useOutletContext()
   const [params, setParams] = useState({
     skip: 0,
+    limit: 50,
     starred: true
   })
   const [timeLogFor, setTimeLogFor] = useState()

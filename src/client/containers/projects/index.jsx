@@ -121,6 +121,10 @@ const Projects = () => {
     })
   }
 
+  const paginationStatus = data.params ?
+    `Display ${data.params.skip + 1} - ${Math.min(data.params.skip + data.params.limit, data.total)} of ${data.total}` :
+    null
+
   return (
     <Grid fullWidth space="loose">
       <Card loose>
@@ -163,6 +167,7 @@ const Projects = () => {
                 )
               }}
             />
+            <Text>{paginationStatus}</Text>
           </Grid>
         </Card.Content>
       </Card>
