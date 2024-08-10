@@ -11,6 +11,8 @@ import Container from 'components/container'
 const Nav = styled.nav`
   background: black;
   color: white;
+  position: sticky;
+  top: 0;
 `
 
 const Menu = styled(Container)`

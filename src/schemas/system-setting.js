@@ -6,7 +6,7 @@ const schema = new mongoose.Schema({
     unique: true
   },
   value: {
-    type: String
+    type: mongoose.Schema.Types.Mixed
   }
 }, {
   timestamps: true,
