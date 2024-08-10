@@ -10,18 +10,18 @@ const normalizeStatus = (status) => {
     .toUpperCase().replace(/\s/g, '_')
 }
 
-const syncSalesJobs = async () => {
-  console.log(`[syncSalesJobs] is starting at ${dayjs().format(jira.DATE_FORMAT)}`)
+const syncSalesJobs = async (info) => {
+  console.log(`[${info.name}] is starting at ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`)
 
-  if (cronState.syncSalesJobs) {
-    console.log('[syncSalesJobs] is inprogress... exited')
+  if (cronState.started) {
+    console.log(`[${info.name}] is inprogress... exited`)
 
     return
   }
 
   try {
     // start job
-    cronState.syncSalesJobs = true
+    cronState.started = true
 
     // init database
     const connection = await createConnection()
@@ -88,7 +88,7 @@ const syncSalesJobs = async () => {
   } catch (e) {
     console.error(e)
   } finally {
-    cronState.syncSalesJobs = false
+    cronState.started = false
   }
 }
 
