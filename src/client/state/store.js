@@ -20,6 +20,14 @@ import {
 
 const sagaMiddleware = createSagaMiddleware()
 
+const safeFork = function* (fork) {
+  try {
+    yield fork()
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 export default configureStore({
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({thunk: false}),
@@ -34,8 +42,8 @@ export default configureStore({
 
 sagaMiddleware.run(function* root() {
   yield all([
-    projectSaga(),
-    timelogSaga(),
-    uiSaga()
+    safeFork(projectSaga),
+    safeFork(timelogSaga),
+    safeFork(uiSaga)
   ])
 })
