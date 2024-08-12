@@ -156,24 +156,87 @@ const summarize = async ({
     Timelog
   } = db.models
 
+  const matchOpt = {
+    projectId: new mongoose.Types.ObjectId(params.id)
+  }
+
   const result = await Timelog.aggregate([
     {
-      $match: {
-        projectId: new mongoose.Types.ObjectId(params.id)
-      }
-    },
-    {
-      $group: {
-        _id: '$email',
-        totalSpentAsSeconds: {
-          $sum: '$spentAsSeconds'
-        },
-        from: {
-          $min: '$date'
-        },
-        to: {
-          $max: '$date'
-        }
+      $facet: {
+        effortAllocations: [
+          {
+            $match: matchOpt
+          },
+          {
+            $group: {
+              _id: '$email',
+              totalSpendAsSeconds: {
+                $sum: '$spentAsSeconds'
+              }
+            }
+          },
+          {
+            $lookup: {
+              from: 'users',
+              localField: '_id',
+              foreignField: 'email',
+              as: 'user'
+            }
+          },
+          {
+            $unwind: '$user'
+          }
+        ],
+        effortStructure: [
+          {
+            $group: {
+              _id: '$workType',
+              totalSpendAsSeconds: {
+                $sum: '$spentAsSeconds'
+              }
+            }
+          }
+        ],
+        timelogs: [
+          {
+            $match: matchOpt
+          },
+          {
+            $lookup: {
+              from: 'users',
+              localField: 'email',
+              foreignField: 'email',
+              as: 'user'
+            }
+          },
+          {
+            $unwind: '$user'
+          }
+        ],
+        project: [
+          {
+            $match: {
+              projectId: new mongoose.Types.ObjectId(params.id)
+            }
+          },
+          {
+            $group: {
+              _id: '$projectId'
+            }
+          },
+          {
+            $lookup: {
+              from: 'projects',
+              localField: '_id',
+              foreignField: '_id',
+              as: 'project'
+            }
+          }, {
+            $project: {
+              project: { $first: '$project' }
+            }
+          }
+        ]
       }
     }
   ])
