@@ -62,6 +62,10 @@ const remindLogTime = async (info) => {
       }
     })
 
+    const {value:skippedUsers} = await SystemSetting.findOne({
+      key: 'NO_REMINDING'
+    })
+
     const {value: reminderMessages} = await SystemSetting.findOne({
       key: 'REMINDER_MESSAGES'
     })
@@ -72,6 +76,10 @@ const remindLogTime = async (info) => {
       `[${today.format('YYYY/MM/DD')}] ${reminderMessage}`,
       '',
       users.reduce((mentions, user) => {
+        if (skippedUsers.indexOf(user.email) > -1) {
+          return mentions
+        }
+
         return [
           ...mentions, (
           user.profiles?.google ?
