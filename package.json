@@ -54,6 +54,7 @@
     "dev": "nodemon --exec babel-node -L src/index.js --watch src --ignore src/client --legacy-watch",
     "cron": "nodemon --exec babel-node -L src/cron.js --watch src --ignore src/client --legacy-watch",
     "build": "webpack --config webpack.config.js",
-    "serve": "nodemon --exec \"webpack serve --config webpack.config.js\" --watch webpack.config.js --legacy-watch"
+    "serve": "nodemon --exec \"webpack serve --config webpack.config.js\" --watch webpack.config.js --legacy-watch",
+    "command:cost": "nodemon --exec babel-node src/commands/timelog-cost.js --watch src --ignore src/client --legacy-watch"
   }
 }

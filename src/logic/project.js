@@ -189,10 +189,30 @@ const summarize = async ({
         ],
         effortStructure: [
           {
+            $match: {
+              projectId: new mongoose.Types.ObjectId(params.id)
+            }
+          },
+          {
             $group: {
               _id: '$workType',
               totalSpendAsSeconds: {
                 $sum: '$spentAsSeconds'
+              }
+            }
+          }
+        ],
+        costStructure: [
+          {
+            $match: {
+              projectId: new mongoose.Types.ObjectId(params.id)
+            }
+          },
+          {
+            $group: {
+              _id: '$workType',
+              totalCost: {
+                $sum: '$cost'
               }
             }
           }

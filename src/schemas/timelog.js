@@ -25,6 +25,10 @@ const schema = new mongoose.Schema({
   forceUnlocked: {
     type: Boolean,
     default: () => false
+  },
+  cost: {
+    type: Number,
+    default: () => 0
   }
 }, {
   timestamps: true
