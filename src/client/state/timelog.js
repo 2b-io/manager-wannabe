@@ -33,7 +33,7 @@ const slide = createSlice({
       (action.payload.timelogs || []).forEach((timelog) => {
         state.timelogs[timelog._id] = timelog
 
-        const dateStr = dayjs(timelog.date).format('YYYYMMDD')
+        const dateStr = dayjs(new Date(timelog.date)).format('YYYYMMDD')
 
         state.spentByDate[dateStr] = (state.spentByDate[dateStr] || 0) + timelog.spentAsSeconds
       })
